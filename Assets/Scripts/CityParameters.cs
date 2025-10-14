@@ -18,10 +18,15 @@ public class CityParameters : EditorBehaviourRunner
     // Con esta config deberian aguantar 2 dias
     private int citizenNUM = 2;
     private int foodConsum = 2; // per day
-    public int foodAmount = 4;
+    public int foodAmount = 30;
 
-    public float Hunger() => foodAmount / citizenNUM;
-
+    public float Hunger() => CalculateHunger();
+    private float CalculateHunger()
+    {
+        float days = (float)foodAmount / (citizenNUM * foodConsum);
+        Debug.Log((days - 1) / (10 - 1));
+        return (days - 1) / (10 - 1); // Normalización
+    }
     public void GatherFood()
     {
         Debug.Log("Gather...");
