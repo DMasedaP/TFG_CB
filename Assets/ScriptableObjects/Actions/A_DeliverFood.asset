@@ -9,13 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d84ffbc499c9c664fb203e18711289c9, type: 3}
-  m_Name: VillageState
+  m_Script: {fileID: 11500000, guid: 84c56daed8200bf46b18826fc28a399b, type: 3}
+  m_Name: A_DeliverFood
   m_EditorClassIdentifier: 
-  foodStock: 0
-  foodCapacity: 50
-  citizens: 0
-  army: 0
-  enemies: 0
-  foodPerCitizenPerDay: 1
-  ticksPerDay: 24
+  actionName: Deliver Food
+  weight: 1.2
+  considerations: []

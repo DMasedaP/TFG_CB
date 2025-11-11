@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d84ffbc499c9c664fb203e18711289c9, type: 3}
-  m_Name: VillageState
+  m_Script: {fileID: 11500000, guid: 88d934893b9febe4d9bd15b9b5ffd6d7, type: 3}
+  m_Name: A_HarvestFarm
   m_EditorClassIdentifier: 
-  foodStock: 0
-  foodCapacity: 50
-  citizens: 0
-  army: 0
-  enemies: 0
-  foodPerCitizenPerDay: 1
-  ticksPerDay: 24
+  actionName: Harvest Farm
+  weight: 1
+  considerations:
+  - {fileID: 11400000, guid: e048c1221c00eca47a3657cfb753c0c0, type: 2}
+  searchRadius: 60

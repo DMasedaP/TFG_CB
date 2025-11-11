@@ -20,4 +20,15 @@ public class VillageState : ScriptableObject
 
     public int TotalCitizens => citizens + army;
     public float FoodPerTick => (TotalCitizens * foodPerCitizenPerDay) / Mathf.Max(1f, ticksPerDay);
+
+    public override string ToString()
+    {
+        return $"--- POPULATION ---\n" +
+            $"Citizens: {citizens}\n" +
+            $"Army: {army}\n" +
+            $"Enemies: {enemies}\n" +
+            $"--- FOOD ---\n" +
+            $"Stock: {foodStock}\n" +
+            $"Capacity: {foodCapacity}\n";
+    }
 }

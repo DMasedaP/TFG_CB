@@ -16,6 +16,7 @@ public class FoodTickSystem : MonoBehaviour
         { // Cada 5 segs
             int consume = Mathf.CeilToInt(village.FoodPerTick);
             gm.TryConsumeFood(consume);
+            Debug.LogError($"FoodTickSystem: Consumo {consume} de comida.");
             yield return wait;
         }
     }

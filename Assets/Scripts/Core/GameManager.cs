@@ -15,14 +15,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        village = ScriptableObject.Instantiate(villageBase); // Copia en mem del SO base
+        village = ScriptableObject.Instantiate(villageBase); // Copia en mem del SO base     
+        StartCoroutine(VillageLog());
     }
-
     #region FOOD METHODS
     public bool TryAddFood(int amount)
     {
         int before = village.foodStock;
         village.foodStock = Mathf.Min(village.foodStock + amount, village.foodCapacity); // Mathf.Min por si supera la capacidad
+        Debug.Log($"[GameManager] Food {before} -> {village.foodStock} (+{amount})");
         if (village.foodStock != before) OnResourceChanged?.Invoke();
         return village.foodStock != before; // Es distinto si se ha agregado comida
     }
@@ -34,4 +35,13 @@ public class GameManager : MonoBehaviour
         return true;
     }
     #endregion
+
+    IEnumerator VillageLog()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(8);
+            Debug.LogError(village.ToString());
+        }
+    }
 }
