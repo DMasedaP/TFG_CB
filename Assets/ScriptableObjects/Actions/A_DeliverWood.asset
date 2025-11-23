@@ -9,16 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d84ffbc499c9c664fb203e18711289c9, type: 3}
-  m_Name: VillageState
+  m_Script: {fileID: 11500000, guid: 5bab027be72f951488bcfd565225e543, type: 3}
+  m_Name: A_DeliverWood
   m_EditorClassIdentifier: 
-  foodStock: 0
-  foodCapacity: 50
-  woodStock: 0
-  woodCapacity: 50
-  targetWoodBuffer: 5
-  citizens: 0
-  army: 0
-  enemies: 0
-  foodPerCitizenPerDay: 1
-  ticksPerDay: 24
+  actionName: Deliver Wood
+  weight: 1
+  considerations: []

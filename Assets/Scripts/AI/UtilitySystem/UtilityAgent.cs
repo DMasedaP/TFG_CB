@@ -17,9 +17,14 @@ public class UtilityAgent : MonoBehaviour
 
     [Header("Estado del agente")]
     public float decisionInterval = 0.5f; // Cada cuanto decide (segs)
-    public int inventoryFood;
-    public int carryCapacity = 20;
     public float hunger01; // 0 = lleno, 1 = hambriento
+
+    [Header("Inventario")]
+    public int inventoryFood;
+    public int inventoryWood;
+
+    public int maxFood = 10;
+    public int maxWood = 1;
 
     Coroutine currentAction;
     float nextDecisionTime;

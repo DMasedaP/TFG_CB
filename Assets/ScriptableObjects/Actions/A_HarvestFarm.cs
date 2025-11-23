@@ -10,13 +10,13 @@ public class A_HarvestFarm : UtilityAction
 
     public override bool CanRun(UtilityAgent agent)
     {
-        if (agent.inventoryFood >= agent.carryCapacity) return false; // Inventario lleno
-        return FindNearest<Farm>(agent.transform.position, searchRadius) != null;
+        if (agent.inventoryFood >= agent.maxFood) return false; // Inventario lleno
+        return Globals.FindNearest<Farm>(agent.transform.position, searchRadius) != null;
     }
 
     public override IEnumerator Execute(UtilityAgent agent)
     {
-        var farm = FindNearest<Farm>(agent.transform.position, searchRadius);
+        var farm = Globals.FindNearest<Farm>(agent.transform.position, searchRadius);
         if (!farm) yield break;
         if (!farm.TryReserveSpot(agent.gameObject, out var spot)) yield break;
 
@@ -30,24 +30,10 @@ public class A_HarvestFarm : UtilityAction
         int gained = farm.Harvest(agent.gameObject);
 
         // Añadir al inventario respetando capacidad
-        int free = Mathf.Max(0, agent.carryCapacity - agent.inventoryFood);
+        int free = Mathf.Max(0, agent.maxFood - agent.inventoryFood);
         int toTake = Mathf.Min(free, gained);
         agent.inventoryFood += toTake;
 
         farm.ReleaseSpot(agent.gameObject);
-    }
-
-    // ---- Helpers ----
-    static T FindNearest<T>(Vector3 from, float radius) where T : Component
-    {
-        var all = Object.FindObjectsOfType<T>();
-        float r2 = radius * radius;
-        T best = null; float bestD2 = float.MaxValue;
-        foreach (var t in all)
-        {
-            float d2 = (t.transform.position - from).sqrMagnitude;
-            if (d2 <= r2 && d2 < bestD2) { bestD2 = d2; best = t; }
-        }
-        return best;
     }
 }

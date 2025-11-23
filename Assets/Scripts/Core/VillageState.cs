@@ -8,6 +8,11 @@ public class VillageState : ScriptableObject
     [Header("Food")]
     public int foodStock;
     public int foodCapacity;
+    
+    [Header("Wood")]
+    public int woodStock;
+    public int woodCapacity;
+    public int targetWoodBuffer;
 
     [Header("Population")]
     public int citizens;    // Campesinos
@@ -29,6 +34,9 @@ public class VillageState : ScriptableObject
             $"Enemies: {enemies}\n" +
             $"--- FOOD ---\n" +
             $"Stock: {foodStock}\n" +
-            $"Capacity: {foodCapacity}\n";
+            $"Capacity: {foodCapacity}\n"+
+            $"--- WOOD ---\n" +
+            $"Stock: {woodStock}\n" +
+            $"Capacity: {woodCapacity}\n";
     }
 }
