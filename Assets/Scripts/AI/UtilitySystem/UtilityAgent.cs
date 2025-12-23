@@ -49,11 +49,11 @@ public class UtilityAgent : MonoBehaviour
             Decide();
         }
     }
-
+    
     void Decide()
     {
         // Calcula la puntuacion de cada accion disponible
-        var validActions = actions.Where(a => a != null && a.CanRun(this));
+        var validActions = actions.Where(a => a != null && a.CanRun(this));        
 
         UtilityAction best = null;
         float bestScore = -1f;
@@ -69,9 +69,11 @@ public class UtilityAgent : MonoBehaviour
         }
         if (best != null)
         {
+            Debug.Log("Hay mejor accion, inicio coroutine");
             currentAction = StartCoroutine(Run(best));
         }
     }
+   
 
     IEnumerator Run(UtilityAction action)
     {

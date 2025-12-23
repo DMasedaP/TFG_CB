@@ -11,11 +11,11 @@ public class A_GatherWood : UtilityAction
     public override bool CanRun(UtilityAgent agent)
     {
         if (agent.inventoryWood >= agent.maxWood) return false; // Inventario lleno
-        return Globals.FindNearest<Tree>(agent.transform.position, searchRadius) != null; // 60 = searchRadius
+        return Globals.FindNearestWithFreeSpot<Tree>(agent.transform.position, searchRadius) != null; // 60 = searchRadius
     }
     public override IEnumerator Execute(UtilityAgent agent)
     {
-        var tree = Globals.FindNearest<Tree>(agent.transform.position, searchRadius);
+        var tree = Globals.FindNearestWithFreeSpot<Tree>(agent.transform.position, searchRadius);
         if (!tree) yield break;
         if (!tree.TryReserveSpot(agent.gameObject, out var spot)) yield break;
 

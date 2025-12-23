@@ -11,12 +11,12 @@ public class A_HarvestFarm : UtilityAction
     public override bool CanRun(UtilityAgent agent)
     {
         if (agent.inventoryFood >= agent.maxFood) return false; // Inventario lleno
-        return Globals.FindNearest<Farm>(agent.transform.position, searchRadius) != null;
+        return Globals.FindNearestWithFreeSpot<Farm>(agent.transform.position, searchRadius) != null;
     }
 
     public override IEnumerator Execute(UtilityAgent agent)
     {
-        var farm = Globals.FindNearest<Farm>(agent.transform.position, searchRadius);
+        var farm = Globals.FindNearestWithFreeSpot<Farm>(agent.transform.position, searchRadius);
         if (!farm) yield break;
         if (!farm.TryReserveSpot(agent.gameObject, out var spot)) yield break;
 

@@ -40,6 +40,13 @@ public class Farm : MonoBehaviour, IWorkplace, IResourceSource
         spot = null;
         return false;
     }
+    public bool HasFreeSpot()
+    {
+        foreach (var s in spots)
+            if (s.reservedBy == null) return true;
+        return false;
+    }
+
     /// <summary>
     /// Libera el puesto ocupado por un trabajador cuando termina su tarea o se va.
     /// </summary>

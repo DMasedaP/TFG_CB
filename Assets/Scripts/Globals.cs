@@ -4,13 +4,17 @@ using UnityEngine;
 
 public static class Globals
 {
-    public static T FindNearest<T>(Vector3 from, float radius) where T : Component
+    public static T FindNearestWithFreeSpot<T>(Vector3 from, float radius) where T : Component, IWorkplace
     {
         var all = Object.FindObjectsOfType<T>();
         float r2 = radius * radius;
-        T best = null; float bestD2 = float.MaxValue;
+
+        T best = null; 
+        float bestD2 = float.MaxValue;
+        
         foreach (var t in all)
         {
+            if (!t.HasFreeSpot()) continue; // Filtro
             float d2 = (t.transform.position - from).sqrMagnitude;
             if (d2 <= r2 && d2 < bestD2) { bestD2 = d2; best = t; }
         }
