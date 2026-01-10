@@ -13,9 +13,13 @@ public class GameManager : MonoBehaviour
 
     public event System.Action OnResourceChanged;
 
+    // UI MANAGER
+    private UI_Manager uiManager;
+
     private void Awake()
     {
         village = ScriptableObject.Instantiate(villageBase); // Copia en mem del SO base     
+        uiManager = FindAnyObjectByType<UI_Manager>();
         StartCoroutine(VillageLog());
     }
     #region FOOD METHODS
@@ -24,7 +28,10 @@ public class GameManager : MonoBehaviour
         int before = village.foodStock;
         village.foodStock = Mathf.Min(village.foodStock + amount, village.foodCapacity); // Mathf.Min por si supera la capacidad
         Debug.Log($"[GameManager] Food {before} -> {village.foodStock} (+{amount})");
-        if (village.foodStock != before) OnResourceChanged?.Invoke();
+        if (village.foodStock != before) { 
+            OnResourceChanged?.Invoke();
+            uiManager.UpdateResources(); // Actualizamos la UI
+        }
         return village.foodStock != before; // Es distinto si se ha agregado comida
     }
     public bool TryConsumeFood(int amount)
@@ -32,6 +39,7 @@ public class GameManager : MonoBehaviour
         if(village.foodStock < amount) return false;
         village.foodStock -= amount;
         OnResourceChanged?.Invoke();
+        uiManager.UpdateResources(); // Actualizamos la UI
         return true;
     }
     #endregion
@@ -41,7 +49,10 @@ public class GameManager : MonoBehaviour
         int before = village.woodStock;
         village.woodStock = Mathf.Min(village.woodStock + amount, village.woodCapacity); // Mathf.Min por si supera la capacidad
         Debug.Log($"[GameManager] Wood {before} -> {village.woodStock} (+{amount})");
-        if (village.woodStock != before) OnResourceChanged?.Invoke();
+        if (village.woodStock != before) { 
+            OnResourceChanged?.Invoke();
+            uiManager.UpdateResources(); // Actualizamos la UI
+        }
         return village.woodStock != before; // Es distinto si se ha agregado comida
     }
     public bool TryConsumeWood(int amount)
@@ -49,6 +60,7 @@ public class GameManager : MonoBehaviour
         if (village.woodStock < amount) return false;
         village.woodStock -= amount;
         OnResourceChanged?.Invoke();
+        uiManager.UpdateResources(); // Actualizamos la UI
         return true;
     }
     #endregion
