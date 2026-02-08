@@ -5,6 +5,7 @@ public class ConstructionManager : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private LayerMask mineSitesLayer; // Capa de los materiales
+    [SerializeField] private GameObject buildingBorder; // Asignar en el editor
     public bool BuildMode {  get; private set; }
 
     private void Awake()
@@ -14,6 +15,8 @@ public class ConstructionManager : MonoBehaviour
     public void ToogleBuildMode()
     {
         BuildMode = !BuildMode;
+        Debug.LogError("TOGGLE BUILD");
+        buildingBorder.SetActive(BuildMode);
         // Añadir algun visual o algo
     }
     private void Update()
