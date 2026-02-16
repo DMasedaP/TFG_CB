@@ -22,18 +22,16 @@ public class ConstructionManager : MonoBehaviour
     private void Update()
     {
         if (!BuildMode) return;
-
-        // Evita clicks atravesando UI
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-            return;
-
         if (Input.GetMouseButtonDown(0))
         {
+            Debug.Log("click izq");
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit, 500f, mineSitesLayer))
             {
+                Debug.Log("Hago el RayCast");
                 MineSite site = hit.collider.GetComponentInParent<MineSite>();
+                if(site != null) Debug.Log("Detecto mina");
                 if (site != null && site.CanConstruct())
                 {
                     site.Construct();
