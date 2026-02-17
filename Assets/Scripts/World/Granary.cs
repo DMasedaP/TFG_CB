@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class Granary : MonoBehaviour
 {
-    public GameManager gm;
     public Transform dropPoint;
 }

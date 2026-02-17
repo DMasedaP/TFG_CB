@@ -19,5 +19,6 @@ public class A_DeliverGold : UtilityAction
         int amount = agent.inventoryGold;
         agent.Blackboard.resources.TryAddGold(amount);
         agent.inventoryGold = 0;
+        os.UpdateGameObjectVisuals(); // Actualizar visualmente el almacen de ores
     }
 }
