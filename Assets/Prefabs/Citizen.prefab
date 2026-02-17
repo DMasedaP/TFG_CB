@@ -168,8 +168,12 @@ MonoBehaviour:
   hunger01: 0
   inventoryFood: 0
   inventoryWood: 0
+  inventoryStone: 0
+  inventoryGold: 0
   maxFood: 10
   maxWood: 1
+  maxStone: 1
+  maxGold: 2
 --- !u!114 &1874738724717799773
 MonoBehaviour:
   m_ObjectHideFlags: 0

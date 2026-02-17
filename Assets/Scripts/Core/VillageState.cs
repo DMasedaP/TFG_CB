@@ -7,12 +7,23 @@ public class VillageState : ScriptableObject
 {
     [Header("Food")]
     public int foodStock;
-    public int foodCapacity;
+    public int foodCapacity; // 50
     
     [Header("Wood")]
     public int woodStock;
-    public int woodCapacity;
-    public int targetWoodBuffer;
+    public int woodCapacity; //50
+    public int targetWoodBuffer; // 5
+
+    [Header("Stone")]
+    public int stoneStock;
+    public int stoneCapacity; // 100
+    public int targetStoneBuffer; // 20
+
+    [Header("Gold")]
+    public int goldStock;
+    public int goldCapacity; // 100
+    public int targetGoldBuffer; // 20
+
 
     [Header("Population")]
     public int citizens;    // Campesinos

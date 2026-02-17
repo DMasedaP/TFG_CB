@@ -22,9 +22,13 @@ public class UtilityAgent : MonoBehaviour
     [Header("Inventario")]
     public int inventoryFood;
     public int inventoryWood;
+    public int inventoryStone;
+    public int inventoryGold;
 
     public int maxFood = 10;
     public int maxWood = 1;
+    public int maxStone = 1;
+    public int maxGold = 2;
 
     Coroutine currentAction;
     float nextDecisionTime;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -62,6 +63,39 @@ public class GameManager : MonoBehaviour
         OnResourceChanged?.Invoke();
         uiManager.UpdateResources(); // Actualizamos la UI
         return true;
+    }
+    #endregion
+    #region STONE METHODS
+    public bool TryAddStone(int amount)
+    {
+        if(amount <= 0) return false;
+        int before = village.stoneStock;
+        village.stoneStock = Mathf.Min(village.stoneStock + amount, village.stoneCapacity);
+
+        if (village.stoneStock != before) // Ha habido un cambio
+        {
+            OnResourceChanged?.Invoke();
+            uiManager.UpdateResources();
+            return true;
+        }
+        else return false;                
+    }
+    #endregion
+
+    #region GOLD METHODS
+    public bool TryAddGold(int amount)
+    {
+        if (amount <= 0) return false;
+        int before = village.goldStock;
+        village.goldStock = Mathf.Min(village.goldStock + amount, village.goldCapacity);
+
+        if (village.goldStock != before) // Ha habido un cambio
+        {
+            OnResourceChanged?.Invoke();
+            uiManager.UpdateResources();
+            return true;
+        }
+        else return false;
     }
     #endregion
 
