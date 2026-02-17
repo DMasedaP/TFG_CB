@@ -20,5 +20,6 @@ public class A_DeliverStone : UtilityAction
         int amount = agent.inventoryStone;
         agent.Blackboard.resources.TryAddStone(amount);
         agent.inventoryStone = 0;
+        os.UpdateGameObjectVisuals(); // Actualizar visualmente el almacen de ores
     }
 }

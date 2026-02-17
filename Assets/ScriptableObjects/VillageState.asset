@@ -17,6 +17,12 @@ MonoBehaviour:
   woodStock: 0
   woodCapacity: 50
   targetWoodBuffer: 5
+  stoneStock: 0
+  stoneCapacity: 16
+  targetStoneBuffer: 6
+  goldStock: 0
+  goldCapacity: 100
+  targetGoldBuffer: 20
   citizens: 0
   army: 0
   enemies: 0
