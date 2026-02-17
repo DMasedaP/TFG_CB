@@ -9,7 +9,7 @@ public abstract class UtilityAction : ScriptableObject
     [Range(0f, 5f)] public float weight = 1f;
 
     [Header("Consideraciones")]
-    public UtilityConsideration[] considerations;
+    public UtilityConsideration[] considerations; // Alguna accion puede tener 0, si no es necesario
 
     /// <summary>
     /// Devuelve la puntuacion (0.. infinito) de la accion para este agente.

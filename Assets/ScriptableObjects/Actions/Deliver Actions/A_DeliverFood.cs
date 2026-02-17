@@ -9,7 +9,7 @@ public class A_DeliverFood : UtilityAction
 
     public override IEnumerator Execute(UtilityAgent agent)
     {
-        var granary = Object.FindObjectOfType<Granary>();
+        var granary = FindObjectOfType<Granary>();
         if (!granary) yield break;
 
         // Ir al punto de entrega

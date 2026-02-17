@@ -9,7 +9,7 @@ public class A_DeliverWood : UtilityAction
 
     public override IEnumerator Execute(UtilityAgent agent)
     {
-        var sawmill = Object.FindObjectOfType<SawMill>();
+        var sawmill = FindObjectOfType<SawMill>();
         if (!sawmill) yield break;
 
         Vector3 target = sawmill.dropPoint != null? sawmill.dropPoint.position : sawmill.transform.position; // Por si no detecta los dropPoints
