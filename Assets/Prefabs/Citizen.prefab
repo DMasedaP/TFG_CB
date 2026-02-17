@@ -163,6 +163,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2d87835855a8c3b4b9262248e684f642, type: 2}
   - {fileID: 11400000, guid: f6cbca25e0c6522439d9aca075775939, type: 2}
   - {fileID: 11400000, guid: 14c1c72c3e1eb00478f47067b3fcd36c, type: 2}
+  - {fileID: 11400000, guid: 042fc423ed32ac9428933d7d4ad94d80, type: 2}
+  - {fileID: 11400000, guid: 097e8a408de59d14facd2de286bfce8f, type: 2}
   mover: {fileID: 0}
   decisionInterval: 0.5
   hunger01: 0
