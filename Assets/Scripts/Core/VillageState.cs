@@ -17,12 +17,12 @@ public class VillageState : ScriptableObject
     [Header("Stone")]
     public int stoneStock;
     public int stoneCapacity; // 16
-    public int targetStoneBuffer; // 6
+    public int targetStoneBuffer; // 4
 
     [Header("Gold")]
     public int goldStock;
     public int goldCapacity; // 100
-    public int targetGoldBuffer; // 20
+    public int targetGoldBuffer; // 10
 
 
     [Header("Population")]
