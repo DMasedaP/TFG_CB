@@ -9,8 +9,8 @@ public class C_FoodNeedByPopulation : UtilityConsideration
     {
         var v = agent.Blackboard.village;
         float dailyNeed = v.TotalCitizens * v.foodPerCitizenPerDay;
-        if (dailyNeed >= 0f) return 0f;
-
+        if (dailyNeed <= 0f) return 0f;
+        
         float ratio = v.foodStock / dailyNeed; // Stock en 'dias' de comida
         return Mathf.Clamp01(1f - Mathf.Clamp01(ratio));
         // 0 => comida suficiente, 1 => urgencia por producir
