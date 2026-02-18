@@ -396,6 +396,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2221517281092780992}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7bed4af49fb67b04bb18705751e332bc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8408841570179531326}
   m_SourcePrefab: {fileID: 100100000, guid: 7bed4af49fb67b04bb18705751e332bc, type: 3}
 --- !u!1 &4615904539055067946 stripped
 GameObject:
@@ -445,6 +449,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2.23
   m_Center: {x: -0.08429313, y: 0.37, z: -0.009306312}
+--- !u!208 &8408841570179531326
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4615904539055067946}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1.9620001, y: 0.99200004, z: 1.9620001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.08400001, y: 0.97900003, z: -0.009000001}
+  m_TimeToStationary: 0.5
 --- !u!4 &5423789791819712912 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7bed4af49fb67b04bb18705751e332bc,

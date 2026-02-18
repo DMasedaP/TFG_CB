@@ -45,9 +45,15 @@ public class VillageState : ScriptableObject
             $"Enemies: {enemies}\n" +
             $"--- FOOD ---\n" +
             $"Stock: {foodStock}\n" +
-            $"Capacity: {foodCapacity}\n"+
+            $"Capacity: {foodCapacity}\n" +
             $"--- WOOD ---\n" +
             $"Stock: {woodStock}\n" +
-            $"Capacity: {woodCapacity}\n";
+            $"Capacity: {woodCapacity}\n" +
+            $"--- GOLD ---\n" +
+            $"Stock: {goldStock}\n" +
+            $"Capacity: {goldCapacity}\n" +
+            $"--- STONE ---\n" +
+            $"Stock: {stoneStock}\n" +
+            $"Capacity: {stoneCapacity}\n";
     }
 }

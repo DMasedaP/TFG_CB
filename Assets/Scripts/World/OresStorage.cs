@@ -20,13 +20,18 @@ public class OresStorage : MonoBehaviour
     public void UpdateGameObjectVisuals()
     {
         // Maximo de oro es 100 y tenemos 16 GameObjects
-
-        // Maximo de piedra es 16 y tenemos 4(4unidades) GameObjects
-        // hay q conseguir dividir el total de tal forma que de resultado en grupos de 4
-        var index = (int)(gm.village.stoneStock / 4); // si tenemos 6 da 1, si tenemos 11 da 2
+        var goldIndex = (int)(gm.village.goldStock / 4) - 1;
         for (int i = 0; i < stoneVisuals.Length; i++)
         {
-            if(i <= index) stoneVisuals[i].SetActive(true);
+            if (i <= goldIndex) goldVisuals[i].SetActive(true);
+            else goldVisuals[i].SetActive(false);
+        }
+        // Maximo de piedra es 16 y tenemos 4(4unidades) GameObjects
+        // hay q conseguir dividir el total de tal forma que de resultado en grupos de 4
+        var stoneIndex = (int)(gm.village.stoneStock / 4) - 1; // si tenemos 6 da 1, si tenemos 11 da 2 // -1 pq redondea hacia arriba
+        for (int i = 0; i < stoneVisuals.Length; i++)
+        {
+            if(i <= stoneIndex) stoneVisuals[i].SetActive(true);
             else stoneVisuals[i].SetActive(false);
         }
     }
