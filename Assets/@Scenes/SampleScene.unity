@@ -313,8 +313,9 @@ GameObject:
   m_Component:
   - component: {fileID: 141228357}
   - component: {fileID: 141228358}
+  - component: {fileID: 141228359}
   m_Layer: 0
-  m_Name: FoodTickSystem
+  m_Name: Tick_SYSTEMS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -349,6 +350,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gm: {fileID: 878676910}
   tickSeconds: 5
+--- !u!114 &141228359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141228356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d828570c72cc654499d946ae3ddd4059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gm: {fileID: 0}
+  tickSeconds: 60
 --- !u!1 &207751751
 GameObject:
   m_ObjectHideFlags: 0
