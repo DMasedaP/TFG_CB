@@ -80,6 +80,14 @@ public class GameManager : MonoBehaviour
         }
         else return false;                
     }
+    public bool TryConsumeStone(int amount)
+    {
+        if (village.stoneStock < amount) return false;
+        village.stoneStock -= amount;
+        OnResourceChanged?.Invoke();
+        uiManager.UpdateResources(); // Actualizamos la UI
+        return true;
+    }
     #endregion
 
     #region GOLD METHODS
