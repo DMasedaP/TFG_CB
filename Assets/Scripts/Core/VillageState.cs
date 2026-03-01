@@ -35,7 +35,6 @@ public class VillageState : ScriptableObject
     public float ticksPerDay = 24f;             // 24h del juego
 
     public int TotalCitizens => citizens + army;
-    public float FoodPerTick => (TotalCitizens * foodPerCitizenPerDay) / Mathf.Max(1f, ticksPerDay);
 
     public override string ToString()
     {

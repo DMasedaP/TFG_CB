@@ -12,12 +12,14 @@ public class UtilityAgent : MonoBehaviour
     [Header("Referencias")]
     public Blackboard blackboard;
     public UtilityAction[] actions;
+    public UtilityAction eatAction;
 
     [HideInInspector] public AgentMover mover;
 
     [Header("Estado del agente")]
     public float decisionInterval = 0.5f; // Cada cuanto decide (segs)
     public float hunger01; // 0 = lleno, 1 = hambriento
+    private const float HUNGER_FACTOR = 0.02f;
 
     [Header("Inventario")]
     public int inventoryFood;
@@ -40,12 +42,18 @@ public class UtilityAgent : MonoBehaviour
     private void Awake()
     {
         mover = GetComponent<AgentMover>();
+        if (eatAction == null) Debug.LogError("Asignar accion: A_EatFood");
     }
     private void Update()
     {
         // El hambre sube lentamente con el tiempo
-        hunger01 = Mathf.Clamp01(hunger01 + Time.deltaTime * 0.01f);
+        hunger01 = Mathf.Clamp01(hunger01 + Time.deltaTime * HUNGER_FACTOR);
 
+        if (hunger01 == 1f)
+        {
+            StartCoroutine(Run(eatAction));
+            hunger01 = 0; // Reseteamos
+        }
         // Si no esta ejecutando una accion, decide
         if(Time.time >= nextDecisionTime && currentAction == null)
         {

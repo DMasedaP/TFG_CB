@@ -167,6 +167,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 097e8a408de59d14facd2de286bfce8f, type: 2}
   - {fileID: 11400000, guid: 7f86b13c9c2149948885f8732a52afd3, type: 2}
   - {fileID: 11400000, guid: 1209c373e4ffe254aa7e7fb263a9e1ee, type: 2}
+  eatAction: {fileID: 11400000, guid: 0b12470e480ae604688d698be8e0bd2b, type: 2}
   mover: {fileID: 0}
   decisionInterval: 0.5
   hunger01: 0
