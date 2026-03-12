@@ -107,7 +107,7 @@ MonoBehaviour:
   cellSize: 10
   width: 20
   height: 20
-  originPos: {x: -100, y: 1, z: -100}
+  originPos: {x: -100, y: 0, z: -100}
 --- !u!65 &5186140847003075194
 BoxCollider:
   m_ObjectHideFlags: 0

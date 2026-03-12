@@ -6,7 +6,7 @@ public class ConstructionManager : MonoBehaviour
     #region VARIABLES
     [Header("References")]
     [SerializeField] private Camera mainCamera;    
-    //[SerializeField] private GameObject buildingBorder; // Asignar en el editor
+    [SerializeField] private GameObject buildingBorder; // Asignar en el editor
     [SerializeField] private GameObject buildingMenuPanel; // Panel construccion estructuras
 
     [Header("Layers")]
@@ -36,7 +36,7 @@ public class ConstructionManager : MonoBehaviour
     private void Awake()
     {
         if(mainCamera == null) mainCamera = Camera.main;
-        //if (buildingBorder == null) Debug.LogError("Asignar buildingBorder en el editor");
+        if (buildingBorder == null) Debug.LogError("Asignar buildingBorder en el editor");
         if (buildingMenuPanel == null) Debug.LogError("Asignar buildingMenuPanel en el editor");
         if (gridSystem == null) Debug.LogError("Asignar el gridSystem del Ground");
         if (ghostMaterial == null) Debug.LogError("Asignar el ghostMaterial en el editor");
@@ -44,7 +44,7 @@ public class ConstructionManager : MonoBehaviour
     public void ToogleBuildMode()
     {
         BuildMode = !BuildMode;
-        //buildingBorder.SetActive(BuildMode);
+        buildingBorder.SetActive(BuildMode);
         buildingMenuPanel.SetActive(BuildMode);
 
         if (!BuildMode) ClearSelection();
