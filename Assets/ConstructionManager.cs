@@ -20,6 +20,7 @@ public class ConstructionManager : MonoBehaviour
     [SerializeField] private Material ghostMaterial;
 
     private GameObject currentGhost;
+    private float currentRotation = 0f;
 
     public bool BuildMode {  get; private set; }
 
@@ -64,6 +65,7 @@ public class ConstructionManager : MonoBehaviour
     public void SelectBuilding(BuildingTypeData buildingData)
     {
         if(buildingData == null) return;
+        currentRotation = 0f;
         BuildMode = true;
         currentSelectionType = BuildSelectionType.Building;
         selectedBuilding = buildingData;
@@ -97,6 +99,8 @@ public class ConstructionManager : MonoBehaviour
                 HandleBuildingPlacement();
                 break;
         }
+       
+        if (Input.GetKeyDown(KeyCode.R)) RotateBuilding();
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -143,7 +147,7 @@ public class ConstructionManager : MonoBehaviour
         }
 
         Vector3 buildPos = gridSystem.GetCellCenterWorld(x, y);
-        Instantiate(selectedBuilding.prefab, buildPos, Quaternion.identity);
+        Instantiate(selectedBuilding.prefab, buildPos, Quaternion.Euler(0, currentRotation, 0));
 
         gridSystem.SetOccupied(x, y, selectedBuilding.width, selectedBuilding.height, true);
 
@@ -233,5 +237,13 @@ public class ConstructionManager : MonoBehaviour
 
             rend.materials = mats;
         }
+    }
+
+    private void RotateBuilding()
+    {
+        currentRotation += 45f;
+
+        if(currentRotation >= 360f) currentRotation = 0f;
+        if(currentGhost != null) currentGhost.transform.rotation = Quaternion.Euler(0, currentRotation, 0);
     }
 }
