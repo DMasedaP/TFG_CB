@@ -6,7 +6,7 @@ public class ConstructionManager : MonoBehaviour
     #region VARIABLES
     [Header("References")]
     [SerializeField] private Camera mainCamera;    
-    [SerializeField] private GameObject buildingBorder; // Asignar en el editor
+    //[SerializeField] private GameObject buildingBorder; // Asignar en el editor
     [SerializeField] private GameObject buildingMenuPanel; // Panel construccion estructuras
 
     [Header("Layers")]
@@ -17,7 +17,8 @@ public class ConstructionManager : MonoBehaviour
     [SerializeField] private GridBuildingSystem gridSystem;
 
     [Header("Ghost")]
-    [SerializeField] private GameObject ghostPrefab;
+    [SerializeField] private Material ghostMaterial;
+
     private GameObject currentGhost;
 
     public bool BuildMode {  get; private set; }
@@ -35,13 +36,15 @@ public class ConstructionManager : MonoBehaviour
     private void Awake()
     {
         if(mainCamera == null) mainCamera = Camera.main;
-        if (buildingBorder == null) Debug.LogError("Asignar buildingBorder en el editor");
+        //if (buildingBorder == null) Debug.LogError("Asignar buildingBorder en el editor");
         if (buildingMenuPanel == null) Debug.LogError("Asignar buildingMenuPanel en el editor");
+        if (gridSystem == null) Debug.LogError("Asignar el gridSystem del Ground");
+        if (ghostMaterial == null) Debug.LogError("Asignar el ghostMaterial en el editor");
     }
     public void ToogleBuildMode()
     {
         BuildMode = !BuildMode;
-        buildingBorder.SetActive(BuildMode);
+        //buildingBorder.SetActive(BuildMode);
         buildingMenuPanel.SetActive(BuildMode);
 
         if (!BuildMode) ClearSelection();
@@ -56,8 +59,6 @@ public class ConstructionManager : MonoBehaviour
         selectedBuilding = null;
 
         DestroyGhost();
-
-        buildingBorder.SetActive(true);
     }
 
     public void SelectBuilding(BuildingTypeData buildingData)
@@ -66,8 +67,6 @@ public class ConstructionManager : MonoBehaviour
         BuildMode = true;
         currentSelectionType = BuildSelectionType.Building;
         selectedBuilding = buildingData;
-
-        buildingBorder.SetActive(true);
 
         CreateGhost();
         Debug.Log("Edificio seleccionado: " + buildingData.buildingName);
@@ -115,7 +114,7 @@ public class ConstructionManager : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, 500f, mineSitesLayer))
         {
             MineSite site = hit.collider.GetComponentInParent<MineSite>();
-
+            if (site == null) Debug.LogError("Hago RayCast, pero MinSite es NULL");
             if (site != null && site.CanConstruct())
             {
                 site.Construct();
@@ -179,13 +178,60 @@ public class ConstructionManager : MonoBehaviour
     {
         DestroyGhost();
 
-        if (ghostPrefab != null)
-            currentGhost = Instantiate(ghostPrefab);
+        if (selectedBuilding == null || selectedBuilding.prefab == null)
+            return;
+
+        currentGhost = Instantiate(selectedBuilding.prefab);
+
+        PrepareGhostObject(currentGhost);
+        ApplyMaterialToGhost(currentGhost);
     }
 
     private void DestroyGhost()
     {
         if (currentGhost != null)
             Destroy(currentGhost);
+    }
+
+    private void PrepareGhostObject(GameObject ghost)
+    {
+        // Desactivar todos los scripts
+        MonoBehaviour[] behaviours = ghost.GetComponentsInChildren<MonoBehaviour>();
+        foreach (MonoBehaviour behaviour in behaviours)
+        {
+            behaviour.enabled = false;
+        }
+
+        // Desactivar colliders
+        Collider[] colliders = ghost.GetComponentsInChildren<Collider>();
+        foreach (Collider col in colliders)
+        {
+            col.enabled = false;
+        }
+
+        // Desactivar física
+        Rigidbody[] rigidbodies = ghost.GetComponentsInChildren<Rigidbody>();
+        foreach (Rigidbody rb in rigidbodies)
+        {
+            rb.isKinematic = true;
+            rb.useGravity = false;
+        }
+    }
+
+    private void ApplyMaterialToGhost(GameObject ghost)
+    {
+        if (ghostMaterial == null) return;
+
+        Renderer[] renderers = ghost.GetComponentsInChildren<Renderer>();
+
+        foreach (Renderer rend in renderers)
+        {
+            Material[] mats = new Material[rend.materials.Length];
+
+            for (int i = 0; i < mats.Length; i++)
+                mats[i] = ghostMaterial;
+
+            rend.materials = mats;
+        }
     }
 }

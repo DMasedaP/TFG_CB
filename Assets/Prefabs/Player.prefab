@@ -48,10 +48,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 6039293134259406357}
+  buildingBorder: {fileID: 0}
+  buildingMenuPanel: {fileID: 0}
   mineSitesLayer:
     serializedVersion: 2
     m_Bits: 8
-  buildingBorder: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  gridSystem: {fileID: 0}
+  ghostMaterial: {fileID: 2100000, guid: 316e3a7ec9b84d340aaacf57220a964f, type: 2}
 --- !u!143 &2136740672989852492
 CharacterController:
   m_ObjectHideFlags: 0
