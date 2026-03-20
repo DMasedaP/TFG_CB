@@ -12,4 +12,9 @@ public class BuildingTypeData : ScriptableObject
     [Header("Grid Size")]
     public int width = 1;
     public int height = 1;
+
+    [Header("Costes")]
+    public int woodCost;
+    public int stoneCost;
+    public int goldCost;
 }
