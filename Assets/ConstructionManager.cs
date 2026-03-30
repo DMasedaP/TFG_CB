@@ -19,6 +19,8 @@ public class ConstructionManager : MonoBehaviour
     [Header("Ghost")]
     [SerializeField] private Material ghostMaterial;
 
+    [SerializeField] private GameManager gameManager;
+    private VillageState villageState;
     private GameObject currentGhost;
     private float currentRotation = 0f;
 
@@ -36,6 +38,10 @@ public class ConstructionManager : MonoBehaviour
 
     private void Awake()
     {
+        gameManager = FindAnyObjectByType<GameManager>();
+        villageState = FindAnyObjectByType<GameManager>().village; // SI NO FUNCIONA CORRECTAMENTE QUIZAS HAYA QUE HACER VILLAGE ESTATICO
+        if (gameManager == null) Debug.LogError("No he podido asignar GameManager");
+        if (villageState == null) Debug.LogError("No he podido asignar villageState");
         if(mainCamera == null) mainCamera = Camera.main;
         if (buildingBorder == null) Debug.LogError("Asignar buildingBorder en el editor");
         if (buildingMenuPanel == null) Debug.LogError("Asignar buildingMenuPanel en el editor");
@@ -145,8 +151,14 @@ public class ConstructionManager : MonoBehaviour
             Debug.Log("No se puede construir ahí");
             return;
         }
+        if (!CanAffordSelectedBuilding())
+        {
+            Debug.LogError("No tienes recursos suficientes;");
+            return;
+        }
 
         Vector3 buildPos = gridSystem.GetCellCenterWorld(x, y);
+        PayBuildingCost();
         Instantiate(selectedBuilding.prefab, buildPos, Quaternion.Euler(0, currentRotation, 0));
 
         gridSystem.SetOccupied(x, y, selectedBuilding.width, selectedBuilding.height, true);
@@ -157,11 +169,26 @@ public class ConstructionManager : MonoBehaviour
     {
         if (currentGhost == null) return;
         if (!GetMouseWorldPosition(out Vector3 worldPos)) return;
+        if (selectedBuilding == null) return;
 
         gridSystem.GetXY(worldPos, out int x, out int y);
         Vector3 snappedPos = gridSystem.GetCellCenterWorld(x, y);
 
         currentGhost.transform.position = snappedPos;
+
+        bool canAfford = CanAffordSelectedBuilding();
+        bool canPlace = gridSystem.CanPlaceBuilding(x, y, selectedBuilding.width, selectedBuilding.height);
+        Renderer[] renderers = currentGhost.GetComponentsInChildren<Renderer>();
+        foreach (Renderer rend in renderers)
+        {
+            foreach (Material mat in rend.materials)
+            {
+                if (canPlace && canAfford)
+                    mat.color = new Color(0f, 1f, 0f, 0.35f); // verde
+                else
+                    mat.color = new Color(1f, 0f, 0f, 0.35f); // rojo
+            }
+        }
     }
 
     private bool GetMouseWorldPosition(out Vector3 worldPosition)
@@ -246,4 +273,21 @@ public class ConstructionManager : MonoBehaviour
         if(currentRotation >= 360f) currentRotation = 0f;
         if(currentGhost != null) currentGhost.transform.rotation = Quaternion.Euler(0, currentRotation, 0);
     }
+
+    #region Build Cost 
+    private bool CanAffordSelectedBuilding()
+    {
+        if(selectedBuilding == null) return false;
+        return villageState.woodStock >= selectedBuilding.woodCost &&
+            villageState.stoneStock >= selectedBuilding.stoneCost &&
+            villageState.goldStock >= selectedBuilding.goldCost;
+    }
+    private void PayBuildingCost()
+    {
+        villageState.woodStock -= selectedBuilding.woodCost;
+        villageState.stoneStock -= selectedBuilding.stoneCost;
+        villageState.goldStock -= selectedBuilding.goldCost;
+        gameManager.uiManager.UpdateResources(); // Actualizamos la UI
+    }
+    #endregion
 }

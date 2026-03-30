@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public event System.Action OnResourceChanged;
 
     // UI MANAGER
-    private UI_Manager uiManager;
+    public UI_Manager uiManager;
 
     private void Awake()
     {
