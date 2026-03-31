@@ -119,6 +119,12 @@ public class ConstructionManager : MonoBehaviour
     {
         if (!Input.GetMouseButtonDown(0)) return;
 
+        if (!CanAffordMine())
+        {
+            Debug.LogError("No tienes recursos suficientes;");
+            return;
+        }
+
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 500f, mineSitesLayer))
@@ -128,6 +134,7 @@ public class ConstructionManager : MonoBehaviour
             if (site != null && site.CanConstruct())
             {
                 site.Construct();
+                PayMineCost();
                 Debug.Log("Mina construida");
             }
         }
@@ -287,6 +294,15 @@ public class ConstructionManager : MonoBehaviour
         villageState.woodStock -= selectedBuilding.woodCost;
         villageState.stoneStock -= selectedBuilding.stoneCost;
         villageState.goldStock -= selectedBuilding.goldCost;
+        gameManager.uiManager.UpdateResources(); // Actualizamos la UI
+    }
+    private bool CanAffordMine()
+    {
+        return villageState.woodStock >= 10;
+    }
+    private void PayMineCost()
+    {
+        villageState.woodStock -= 10;
         gameManager.uiManager.UpdateResources(); // Actualizamos la UI
     }
     #endregion

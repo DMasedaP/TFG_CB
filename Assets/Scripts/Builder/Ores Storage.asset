@@ -17,3 +17,6 @@ MonoBehaviour:
   prefab: {fileID: 2390510415082883192, guid: 92845267ca0abdb4d90057f030ea377d, type: 3}
   width: 1
   height: 1
+  woodCost: 20
+  stoneCost: 0
+  goldCost: 0
