@@ -15,8 +15,8 @@ MonoBehaviour:
   buildingName: SawMill
   icon: {fileID: 21300000, guid: 68c846833483d18408ac456c661c749a, type: 3}
   prefab: {fileID: 5164787464746639423, guid: 5127ab1e279b3264082bf32d3af59778, type: 3}
-  width: 1
+  width: 2
   height: 1
-  woodCost: 5
+  woodCost: 14
   stoneCost: 0
   goldCost: 0
