@@ -1872,6 +1872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   villageBase: {fileID: 11400000, guid: 517e8d666bc1eff49896ba0273058376, type: 2}
   village: {fileID: 0}
+  uiManager: {fileID: 0}
 --- !u!1 &906709289
 GameObject:
   m_ObjectHideFlags: 0
@@ -3698,17 +3699,17 @@ PrefabInstance:
     - target: {fileID: 3144893219022306483, guid: f38cf50168cbdee4e8c0bafba3eaf48f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.76
+      value: -56.9
       objectReference: {fileID: 0}
     - target: {fileID: 3144893219022306483, guid: f38cf50168cbdee4e8c0bafba3eaf48f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 24
+      value: 68.4
       objectReference: {fileID: 0}
     - target: {fileID: 3144893219022306483, guid: f38cf50168cbdee4e8c0bafba3eaf48f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.01
+      value: -58.9
       objectReference: {fileID: 0}
     - target: {fileID: 3144893219022306483, guid: f38cf50168cbdee4e8c0bafba3eaf48f,
         type: 3}
@@ -3749,6 +3750,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6039293134259406357, guid: f38cf50168cbdee4e8c0bafba3eaf48f,
+        type: 3}
+      propertyPath: orthographic size
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6516158263114678614, guid: f38cf50168cbdee4e8c0bafba3eaf48f,
         type: 3}
