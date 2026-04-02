@@ -20,3 +20,4 @@ MonoBehaviour:
   woodCost: 6
   stoneCost: 0
   goldCost: 0
+  isHouse: 1

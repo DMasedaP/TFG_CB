@@ -18,7 +18,7 @@ public class VillageState : ScriptableObject
     public int stoneStock;
     public int stoneCapacity; // 16
     public int targetStoneBuffer; // 4
-
+    
     [Header("Gold")]
     public int goldStock;
     public int goldCapacity; // 100
@@ -27,6 +27,7 @@ public class VillageState : ScriptableObject
 
     [Header("Population")]
     public int citizens;    // Campesinos
+    public int maxCitizens; // Max Campesinos
     public int army;        // Ejercito
     public int enemies;     // Enemigos
 

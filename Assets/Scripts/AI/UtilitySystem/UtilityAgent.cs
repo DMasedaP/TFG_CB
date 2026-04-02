@@ -32,6 +32,12 @@ public class UtilityAgent : MonoBehaviour
     public int maxStone = 1;
     public int maxGold = 2;
 
+    [Header("Sueño")]
+    public bool isSleeping;
+    public bool sleptOutsideLastNight;
+    public House assignedHouse;
+    public int outdoorSleepCounter = 0;
+
     Coroutine currentAction;
     float nextDecisionTime;
 
@@ -43,6 +49,14 @@ public class UtilityAgent : MonoBehaviour
     {
         mover = GetComponent<AgentMover>();
         if (eatAction == null) Debug.LogError("Asignar accion: A_EatFood");
+    }
+    private void Start()
+    {
+        if (DayNightCycle.Instance != null)
+        {
+            DayNightCycle.Instance.OnNightStarted += HandleNightStarted;
+            DayNightCycle.Instance.OnDayStarted += HandleDayStarted;
+        }
     }
     private void Update()
     {
@@ -61,7 +75,23 @@ public class UtilityAgent : MonoBehaviour
             Decide();
         }
     }
-    
+    #region Day Night
+    private void HandleNightStarted()
+    {
+        sleptOutsideLastNight = false;
+        isSleeping = false;
+        InterruptAndDecide();
+    }
+
+    private void HandleDayStarted()
+    {
+        ResolveSleepOutcome();
+        isSleeping = false;
+        PopulationManager.Instance?.ReleaseHouse(this);
+        assignedHouse = null;
+        InterruptAndDecide();
+    }
+    #endregion
     void Decide()
     {
         // Calcula la puntuacion de cada accion disponible
@@ -85,7 +115,53 @@ public class UtilityAgent : MonoBehaviour
             currentAction = StartCoroutine(Run(best));
         }
     }
-   
+    public void CancelCurrentAction()
+    {
+        if (currentAction != null)
+        {
+            StopCoroutine(currentAction);
+            currentAction = null;
+        }
+    }
+
+    public void InterruptAndDecide()
+    {
+        CancelCurrentAction();
+        ForceDecision();
+    }
+    public void ForceDecision()
+    {
+        nextDecisionTime = Time.time;
+        if (currentAction == null)
+            Decide();
+    }
+    /// <summary>
+    /// Gestiona si ha dormido fuera una noche
+    /// </summary>
+    private void ResolveSleepOutcome()
+    {
+        if (sleptOutsideLastNight)
+        {
+            outdoorSleepCounter++;
+
+            float deathChance = Mathf.Clamp01(0.15f * outdoorSleepCounter);
+            if (Random.value < deathChance)
+            {
+                Die();
+                return;
+            }
+        }
+        else
+        {
+            outdoorSleepCounter = Mathf.Max(0, outdoorSleepCounter - 1);
+        }
+    }
+    private void Die()
+    {
+        Village.citizens = Mathf.Max(0, Village.citizens - 1);
+        PopulationManager.Instance?.ReleaseHouse(this);
+        Destroy(gameObject); // Ya con esto lanzamos desde CitizenAgent una orden a PopulaitonManager de que quite haga UnRegister
+    }
 
     IEnumerator Run(UtilityAction action)
     {

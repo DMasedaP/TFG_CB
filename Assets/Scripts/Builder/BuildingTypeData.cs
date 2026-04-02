@@ -17,4 +17,7 @@ public class BuildingTypeData : ScriptableObject
     public int woodCost;
     public int stoneCost;
     public int goldCost;
+
+    [Header("Housing")]
+    public bool isHouse;
 }
