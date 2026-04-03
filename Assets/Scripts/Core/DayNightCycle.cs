@@ -21,10 +21,12 @@ public class DayNightCycle : MonoBehaviour
     [Header("Color")]
     [SerializeField] private Gradient colorGradient;
 
-    private float fullDayDurationSecs = 240f;
+    private const float fullDayDurationSecs = 240f; // VELOCIDAD DE SIMUALCION DEL CICLO
     private float startHour = 8f;
     private float nightStartsAt = 22f;
     private float dayStartsAt = 6f;
+
+    float hoursPerSecond = 24f / fullDayDurationSecs;
 
     [SerializeField] public float CurrentHour;
     public bool IsNight {  get; private set; }
@@ -50,7 +52,6 @@ public class DayNightCycle : MonoBehaviour
     }
     private void Update()
     {
-        float hoursPerSecond = 24f / fullDayDurationSecs;
         CurrentHour += Time.deltaTime * hoursPerSecond;
 
         if (CurrentHour >= 24f)
@@ -77,7 +78,7 @@ public class DayNightCycle : MonoBehaviour
         float time01 =CurrentHour / 24f;
 
         // ROTACIÓN (sol gira en el cielo)
-        float sunAngle = time01 * 360f;
+        float sunAngle = time01 * 360f * .85f; // .85 es un ajust epara que tarde más en anochecer
         dirLight.transform.rotation =
             Quaternion.Euler(sunAngle + sunRotationOffset.x, sunRotationOffset.y, sunRotationOffset.z);
 
