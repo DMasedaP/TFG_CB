@@ -41,9 +41,12 @@ public class UtilityAgent : MonoBehaviour
     Coroutine currentAction;
     float nextDecisionTime;
 
+    private bool isDead = false;
+
     public Blackboard Blackboard => blackboard;
     public GameManager GameManager => blackboard.resources; // Acceso directo
     public VillageState Village => GameManager.village;
+    private PopulationManager popManager;
 
     private void Awake()
     {
@@ -52,6 +55,7 @@ public class UtilityAgent : MonoBehaviour
     }
     private void Start()
     {
+        popManager = FindObjectOfType<PopulationManager>();
         if (DayNightCycle.Instance != null)
         {
             DayNightCycle.Instance.OnNightStarted += HandleNightStarted;
@@ -78,6 +82,7 @@ public class UtilityAgent : MonoBehaviour
     #region Day Night
     private void HandleNightStarted()
     {
+        if (isDead || this == null) return;
         sleptOutsideLastNight = false;
         isSleeping = false;
         InterruptAndDecide();
@@ -85,6 +90,7 @@ public class UtilityAgent : MonoBehaviour
 
     private void HandleDayStarted()
     {
+        if (isDead || this == null) return;
         ResolveSleepOutcome();
         isSleeping = false;
         PopulationManager.Instance?.ReleaseHouse(this);
@@ -117,6 +123,7 @@ public class UtilityAgent : MonoBehaviour
     }
     public void CancelCurrentAction()
     {
+        if (isDead || this == null) return;
         if (currentAction != null)
         {
             StopCoroutine(currentAction);
@@ -126,6 +133,7 @@ public class UtilityAgent : MonoBehaviour
 
     public void InterruptAndDecide()
     {
+        if (isDead || this == null) return;
         CancelCurrentAction();
         ForceDecision();
     }
@@ -144,23 +152,52 @@ public class UtilityAgent : MonoBehaviour
         {
             outdoorSleepCounter++;
 
-            float deathChance = Mathf.Clamp01(0.15f * outdoorSleepCounter);
+            float deathChance = Mathf.Clamp01(0.10f * outdoorSleepCounter);
             if (Random.value < deathChance)
             {
+                Debug.LogError($"rnd({Random.value}) < deathChance({deathChance})");
                 Die();
                 return;
             }
         }
         else
         {
-            outdoorSleepCounter = Mathf.Max(0, outdoorSleepCounter - 1);
+            outdoorSleepCounter = 0;
         }
     }
     private void Die()
     {
+        /*
+        isDead = true;
+        UnsubscribeFromDayNight();
         Village.citizens = Mathf.Max(0, Village.citizens - 1);
         PopulationManager.Instance?.ReleaseHouse(this);
         Destroy(gameObject); // Ya con esto lanzamos desde CitizenAgent una orden a PopulaitonManager de que quite haga UnRegister
+        */
+        if (isDead) return;
+        isDead = true;
+
+        UnsubscribeFromDayNight();
+
+        if (PopulationManager.Instance != null)
+            PopulationManager.Instance.ReleaseHouse(this);
+
+        if (currentAction != null)
+        {
+            try
+            {
+                StopCoroutine(currentAction);
+            }
+            catch
+            {
+            }
+
+            currentAction = null;
+        }
+
+        Village.citizens = Mathf.Max(0, Village.citizens - 1);
+
+        Destroy(gameObject);
     }
 
     IEnumerator Run(UtilityAction action)
@@ -174,5 +211,19 @@ public class UtilityAgent : MonoBehaviour
     public IEnumerator WaitSeconds(float t)
     {
         yield return new WaitForSeconds(t);
+    }
+
+    private void OnDestroy()
+    {
+        if (PopulationManager.Instance != null)
+            PopulationManager.Instance.ReleaseHouse(this);
+    }
+    private void UnsubscribeFromDayNight()
+    {
+        if (DayNightCycle.Instance != null)
+        {
+            DayNightCycle.Instance.OnNightStarted -= HandleNightStarted;
+            DayNightCycle.Instance.OnDayStarted -= HandleDayStarted;
+        }
     }
 }

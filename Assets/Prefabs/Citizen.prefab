@@ -159,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blackboard: {fileID: 0}
   actions:
+  - {fileID: 11400000, guid: 930b2f0b1a65d7b4bac574a69e0b73e2, type: 2}
   - {fileID: 11400000, guid: 622ba322cc3bfca42ad7e6c7e792f2d3, type: 2}
   - {fileID: 11400000, guid: 2d87835855a8c3b4b9262248e684f642, type: 2}
   - {fileID: 11400000, guid: f6cbca25e0c6522439d9aca075775939, type: 2}
@@ -179,6 +180,10 @@ MonoBehaviour:
   maxWood: 1
   maxStone: 1
   maxGold: 2
+  isSleeping: 0
+  sleptOutsideLastNight: 0
+  assignedHouse: {fileID: 0}
+  outdoorSleepCounter: 0
 --- !u!114 &1874738724717799773
 MonoBehaviour:
   m_ObjectHideFlags: 0
