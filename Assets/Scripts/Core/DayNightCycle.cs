@@ -22,7 +22,7 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] private Gradient colorGradient;
 
     private const float fullDayDurationSecs = 240f; // VELOCIDAD DE SIMUALCION DEL CICLO
-    private float startHour = 21;
+    private float startHour = 21.8f;
     private float nightStartsAt = 22f;
     private float dayStartsAt = 6f;
 

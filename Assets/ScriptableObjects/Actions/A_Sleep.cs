@@ -38,19 +38,18 @@ public class A_Sleep : UtilityAction
         if (agent.mover != null)
             agent.mover.GoTo(targetPos, 1.2f);
 
+        agent.mover.LayDown(); // Nos tumbamos, ESTO HACE STOP()
         while (DayNightCycle.Instance.IsNight)
         {
-            /*float dist = Vector3.Distance(agent.transform.position, targetPos);
+            float dist = Vector3.Distance(agent.transform.position, targetPos);
 
-            if (dist <= arriveDistance)
+            if (dist <= 0.5f)
             {
                 agent.isSleeping = true;
-                if (agent.mover != null)
-                    agent.mover.Stop();
-            }*/
+            }
             yield return new WaitForSeconds(sleepCheckInterval);
         }
-
+        agent.mover.StandUp(); // Nos levantamos
         agent.isSleeping = false;
     }
 }
