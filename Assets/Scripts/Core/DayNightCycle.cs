@@ -25,9 +25,10 @@ public class DayNightCycle : MonoBehaviour
 
     [Header("Color")]
     [SerializeField] private Gradient colorGradient;
+    public float WeatherLightMultiplier { get; set; } = 1f; // Para cuando llueva
 
     private const float fullDayDurationSecs = 240f; // VELOCIDAD DE SIMUALCION DEL CICLO
-    private float startHour = 20f;
+    private float startHour = 10;
     private float nightStartsAt = 22f;
     private float dayStartsAt = 6f;
 
@@ -53,15 +54,14 @@ public class DayNightCycle : MonoBehaviour
     {
         // Suscribimos funciones
         OnDayStarted += ChangeDayIcon;
-        OnNightStarted += ChangeNightIcon;
-
-        sun_img.SetActive(true);
-        moon_img.SetActive(false);
+        OnNightStarted += ChangeNightIcon;                
 
         if (dirLight == null) Debug.LogError("Asigna la luz en el inspector");
         if (UI_timerText == null) Debug.LogError("Asigna el TMP de la hora");
         CurrentHour = startHour;
         IsNight = CheckIsNight(CurrentHour);
+        sun_img.SetActive(!IsNight);
+        moon_img.SetActive(IsNight);
     }
     private void Update()
     {
@@ -100,7 +100,7 @@ public class DayNightCycle : MonoBehaviour
 
         // INTENSIDAD
         float intensity = intensityCurve.Evaluate(time01);
-        dirLight.intensity = intensity;
+        dirLight.intensity = intensity * WeatherLightMultiplier;
 
         // COLOR
         Color color = colorGradient.Evaluate(time01);

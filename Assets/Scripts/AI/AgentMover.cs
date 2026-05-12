@@ -7,8 +7,14 @@ using UnityEngine.AI;
 public class AgentMover : MonoBehaviour
 {
     private NavMeshAgent agent;
+    private float baseSpeed;
+    private float multiplier = 1f;
 
-    void Awake() => agent = GetComponent<NavMeshAgent>();
+    void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        baseSpeed = agent.speed;
+    }
 
     public IEnumerator GoTo(Vector3 pos, float stoppingDist)
     {
@@ -35,5 +41,13 @@ public class AgentMover : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         agent.enabled = true;
         agent.updateRotation = true;        
+    }
+
+    private void Update()
+    {
+        // Para cuando llueva
+        if (NaturalAccidentManager.Instance != null)
+            multiplier = NaturalAccidentManager.Instance.CurrentMoveSpeedMultiplier;
+        agent.speed = baseSpeed * multiplier;
     }
 }
