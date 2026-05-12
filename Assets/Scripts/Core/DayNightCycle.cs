@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
+using UnityEngine.UI;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class DayNightCycle : MonoBehaviour
 
     [Header("Referencias")]
     [SerializeField] private Light dirLight;
+    [SerializeField] private TextMeshProUGUI UI_timerText;
+    [SerializeField] private GameObject sun_img;
+    [SerializeField] private GameObject moon_img;
 
     [Header("Rotación del sol")]
     [SerializeField] private Vector3 sunRotationOffset = new Vector3(-90f, 0f, 0f);
@@ -22,7 +27,7 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] private Gradient colorGradient;
 
     private const float fullDayDurationSecs = 240f; // VELOCIDAD DE SIMUALCION DEL CICLO
-    private float startHour = 21.8f;
+    private float startHour = 20f;
     private float nightStartsAt = 22f;
     private float dayStartsAt = 6f;
 
@@ -46,7 +51,15 @@ public class DayNightCycle : MonoBehaviour
     }
     private void Start()
     {
+        // Suscribimos funciones
+        OnDayStarted += ChangeDayIcon;
+        OnNightStarted += ChangeNightIcon;
+
+        sun_img.SetActive(true);
+        moon_img.SetActive(false);
+
         if (dirLight == null) Debug.LogError("Asigna la luz en el inspector");
+        if (UI_timerText == null) Debug.LogError("Asigna el TMP de la hora");
         CurrentHour = startHour;
         IsNight = CheckIsNight(CurrentHour);
     }
@@ -56,6 +69,9 @@ public class DayNightCycle : MonoBehaviour
 
         if (CurrentHour >= 24f)
             CurrentHour -= 24f;
+
+        // Ajustamos UI
+        UI_timerText.text = $"{Mathf.FloorToInt(CurrentHour)} h";
 
         bool newNight = CheckIsNight(CurrentHour);
 
@@ -90,5 +106,18 @@ public class DayNightCycle : MonoBehaviour
         Color color = colorGradient.Evaluate(time01);
         dirLight.color = color;
     }
+    private void ChangeDayIcon()
+    {
+        UpdateUI(false);
+    }
+    private void ChangeNightIcon()
+    {
+        UpdateUI(true);
+    }
 
+    void UpdateUI(bool isNight)
+    {
+        sun_img.SetActive(!isNight);
+        moon_img.SetActive(isNight);
+    }
 }
