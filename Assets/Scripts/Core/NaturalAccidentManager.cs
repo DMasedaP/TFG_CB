@@ -4,7 +4,7 @@ using UnityEngine;
 public enum NaturalAccidentType
 {
     Rain,
-    Fire,
+    ExtremeHeat,
     Flood,
     Storm
 }
@@ -33,8 +33,16 @@ public class NaturalAccidentManager : MonoBehaviour
 
     [Header("Rain")]
     [SerializeField] private GameObject rainVisual;
-    [SerializeField] private float rainLightMultiplier = 0.45f;
-    [SerializeField] private float rainMoveSpeedMultiplier = 0.65f;
+    [SerializeField] private float rainLightMultiplier = 0.45f; // Modificador luz
+    [SerializeField] private float rainMoveSpeedMultiplier = 0.65f; // Modificador velocidad agentes
+
+    [Header("Extreme Heat")]
+    [SerializeField] private float heatLightMult = 1.25f; // Modificador luz
+    [SerializeField] private float heatMoveSpeedMult = 0.85f; // Modificador velocidad agentes
+    [SerializeField, Range(0f, 1f)] private float heatDeathChancePerTick = 0.05f; // Prob muerte por ExtremeHeat
+    [SerializeField, Range(0f, 1f)] private float buildingIgniteChancePerTick = 0.08f; // Prob incendio por ExtremeHeat
+    [SerializeField] private float heatEffectTickInterval = 5f;
+    [SerializeField] private int fireDamagePerTick = 10;
 
     [Header("Lighting")]
     [SerializeField] private DayNightCycle dayNightLighting;
@@ -45,7 +53,9 @@ public class NaturalAccidentManager : MonoBehaviour
     public float CurrentMoveSpeedMultiplier { get; private set; } = 1f;
 
     private float timer;
+
     private Coroutine accidentRoutine;
+    private Coroutine heatRoutine; // Controla los efectos repetidos internos del calor extremo
 
     private void Awake()
     {
@@ -138,8 +148,8 @@ public class NaturalAccidentManager : MonoBehaviour
                 StartRain();
                 break;
 
-            case NaturalAccidentType.Fire:
-                Debug.Log("Incendio sin implementar");
+            case NaturalAccidentType.ExtremeHeat:
+                StartExtremeHeat();
                 break;
 
             case NaturalAccidentType.Flood:
@@ -159,9 +169,13 @@ public class NaturalAccidentManager : MonoBehaviour
             case NaturalAccidentType.Rain:
                 EndRain();
                 break;
+
+            case NaturalAccidentType.ExtremeHeat:
+                EndExtremeHeat();
+                break;
         }
     }
-
+    #region RAIN
     private void StartRain()
     {
         Debug.Log("Empieza la lluvia");
@@ -187,4 +201,70 @@ public class NaturalAccidentManager : MonoBehaviour
         if (dayNightLighting != null)
             dayNightLighting.WeatherLightMultiplier = 1f;
     }
+    #endregion
+    #region EXTREME HEAT
+    private void StartExtremeHeat()
+    {
+        Debug.Log("Empieza ola de calor extremo");
+        CurrentMoveSpeedMultiplier = heatMoveSpeedMult;
+
+        dayNightLighting.WeatherLightMultiplier = heatLightMult;
+
+        heatRoutine = StartCoroutine(ExtremeHeatEffects());
+    }
+    private void EndExtremeHeat()
+    {
+        Debug.Log("Termina la ola de calor extremo");
+        CurrentMoveSpeedMultiplier = 1f;
+        dayNightLighting.WeatherLightMultiplier = 1f;
+
+        if (heatRoutine != null)
+        {
+            StopCoroutine(heatRoutine);
+            heatRoutine = null;
+        }
+    }
+    private IEnumerator ExtremeHeatEffects()
+    {
+        while (IsAccidentActive && CurrentAccident == NaturalAccidentType.ExtremeHeat)
+        {
+            TryKillCitizensByHeat();
+            TryIgniteBuildings();
+
+            yield return new WaitForSeconds(heatEffectTickInterval);
+        }
+    }
+    private void TryKillCitizensByHeat()
+    {
+        UtilityAgent[] agents = FindObjectsByType<UtilityAgent>(FindObjectsSortMode.None);
+
+        foreach (UtilityAgent agent in agents)
+        {
+            if (agent == null)
+                continue;
+
+            if (Random.value <= heatDeathChancePerTick)
+            {
+                agent.DieFromAccident("Murió por una insolación.");
+            }
+        }
+    }
+    private void TryIgniteBuildings()
+    {
+        BuildingAccidentHandler[] buildings =
+            FindObjectsByType<BuildingAccidentHandler>(FindObjectsSortMode.None);
+
+        foreach (BuildingAccidentHandler building in buildings)
+        {
+            if (building == null)
+                continue;
+
+            building.TryIgnite(
+                buildingIgniteChancePerTick,
+                fireDamagePerTick,
+                heatEffectTickInterval
+            );
+        }
+    }
+    #endregion
 }

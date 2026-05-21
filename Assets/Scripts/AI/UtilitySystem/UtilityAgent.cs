@@ -199,6 +199,12 @@ public class UtilityAgent : MonoBehaviour
 
         Destroy(gameObject);
     }
+    public void DieFromAccident(string reason)
+    {
+        Debug.Log($"{name}: {reason}");
+        if (isDead) return;
+        Die();
+    }
 
     IEnumerator Run(UtilityAction action)
     {

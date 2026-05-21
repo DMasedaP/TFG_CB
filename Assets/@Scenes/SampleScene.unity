@@ -7250,17 +7250,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bafa60a75d1a064784743de66a8365b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkInterval: 60
-  accidentChancePerCheck: 0.25
+  checkInterval: 5
+  accidentChancePerCheck: 1
   accidents:
   - type: 0
     enabled: 1
     probabilityWeight: 1
     minDuration: 30
     maxDuration: 80
+  - type: 1
+    enabled: 1
+    probabilityWeight: 100
+    minDuration: 30
+    maxDuration: 60
   rainVisual: {fileID: 391077532}
   rainLightMultiplier: 0.45
   rainMoveSpeedMultiplier: 0.65
+  heatLightMult: 1.25
+  heatMoveSpeedMult: 0.85
+  heatDeathChancePerTick: 0.05
+  buildingIgniteChancePerTick: 0.08
+  heatEffectTickInterval: 5
+  fireDamagePerTick: 10
   dayNightLighting: {fileID: 603880032}
 --- !u!1 &906709289
 GameObject:
@@ -10234,5 +10245,5 @@ SceneRoots:
   - {fileID: 141228357}
   - {fileID: 1658982430}
   - {fileID: 603880031}
-  - {fileID: 391077535}
   - {fileID: 906276412}
+  - {fileID: 391077535}
