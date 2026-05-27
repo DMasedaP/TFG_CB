@@ -10,10 +10,20 @@ public class AgentMover : MonoBehaviour
     private float baseSpeed;
     private float multiplier = 1f;
 
+    private Animator animator;
+
+    [Header("Animation")]
+    private string speedParam = "Speed";
+    private float animationSmoothTime = 0.1f;
+
+    private float currentAnimationSpeed;
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         baseSpeed = agent.speed;
+        animator = GetComponent<Animator>();
+        if (animator == null) Debug.LogError("No hay animator, arregle esto");
     }
 
     public IEnumerator GoTo(Vector3 pos, float stoppingDist)
@@ -49,5 +59,23 @@ public class AgentMover : MonoBehaviour
         if (NaturalAccidentManager.Instance != null)
             multiplier = NaturalAccidentManager.Instance.CurrentMoveSpeedMultiplier;
         agent.speed = baseSpeed * multiplier;
+
+        UpdateMovementAnimation();
+    }
+
+    private void UpdateMovementAnimation()
+    {
+        if (animator == null || agent == null || !agent.enabled)
+            return;
+
+        float targetSpeed = agent.velocity.magnitude;
+
+        currentAnimationSpeed = Mathf.Lerp(
+            currentAnimationSpeed,
+            targetSpeed,
+            Time.deltaTime / animationSmoothTime
+        );
+
+        animator.SetFloat(speedParam, currentAnimationSpeed);
     }
 }
