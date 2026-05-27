@@ -14,9 +14,15 @@ public class AgentMover : MonoBehaviour
 
     [Header("Animation")]
     private string speedParam = "Speed";
-    private float animationSmoothTime = 0.1f;
+    private float animationSmoothTime = 0.5f;
 
     private float currentAnimationSpeed;
+
+    [Header("Sleep Visuals")]
+    [SerializeField] private Transform visualRoot;
+
+    private Quaternion originalVisualLocalRotation;
+    private Vector3 originalVisualLocalPosition;
 
     void Awake()
     {
@@ -24,6 +30,9 @@ public class AgentMover : MonoBehaviour
         baseSpeed = agent.speed;
         animator = GetComponent<Animator>();
         if (animator == null) Debug.LogError("No hay animator, arregle esto");
+        // Visuals para sleep
+        originalVisualLocalRotation = visualRoot.localRotation;
+        originalVisualLocalPosition = visualRoot.localPosition;
     }
 
     public IEnumerator GoTo(Vector3 pos, float stoppingDist)
@@ -42,15 +51,26 @@ public class AgentMover : MonoBehaviour
     public void LayDown()
     {
         Stop();
+        ForceIdleAnimation();
+        agent.ResetPath(); //
         agent.updateRotation = false;
-        agent.enabled = false;        
-        transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        agent.enabled = false;
+        if (visualRoot != null)
+        {
+            Debug.LogError("LayDown llamado. VisualRoot: " + visualRoot.name);
+            visualRoot.localRotation = originalVisualLocalRotation * Quaternion.Euler(90f, 0f, 0f);
+        }
     }
     public void StandUp()
     {
-        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        if (visualRoot != null)
+        {
+            visualRoot.localRotation = originalVisualLocalRotation;
+            visualRoot.localPosition = originalVisualLocalPosition;
+        }
         agent.enabled = true;
-        agent.updateRotation = true;        
+        agent.updateRotation = true;
+        ForceIdleAnimation();
     }
 
     private void Update()
@@ -77,5 +97,14 @@ public class AgentMover : MonoBehaviour
         );
 
         animator.SetFloat(speedParam, currentAnimationSpeed);
+    }
+    private void ForceIdleAnimation()
+    {
+        if (animator == null)
+            return;
+
+        animator.SetFloat(speedParam, 0f);
+        animator.Play("Idle", 0, 0f);
+        animator.Update(0f);
     }
 }

@@ -6356,6 +6356,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 7
     m_NumAlphaKeys: 2
+  startHour: 21.5
   CurrentHour: 0
 --- !u!1 &621649152
 GameObject:
@@ -7250,8 +7251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bafa60a75d1a064784743de66a8365b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkInterval: 5
-  accidentChancePerCheck: 1
+  checkInterval: 60
+  accidentChancePerCheck: 0.25
   accidents:
   - type: 0
     enabled: 1
@@ -7260,7 +7261,7 @@ MonoBehaviour:
     maxDuration: 80
   - type: 1
     enabled: 1
-    probabilityWeight: 100
+    probabilityWeight: 1
     minDuration: 30
     maxDuration: 60
   rainVisual: {fileID: 391077532}
