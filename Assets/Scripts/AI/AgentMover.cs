@@ -28,7 +28,7 @@ public class AgentMover : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         baseSpeed = agent.speed;
-        animator = GetComponent<Animator>();
+        animator = visualRoot.GetComponent<Animator>();
         if (animator == null) Debug.LogError("No hay animator, arregle esto");
         // Visuals para sleep
         originalVisualLocalRotation = visualRoot.localRotation;
@@ -43,11 +43,15 @@ public class AgentMover : MonoBehaviour
         agent.SetDestination(pos);
         while(agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
             yield return null;
+
+        //Stop();
+        //ForceIdleAnimation();
     }
     public void Stop()
     {
         agent.isStopped = true;
     }
+    #region SLEEP METHODS
     public void LayDown()
     {
         Stop();
@@ -72,7 +76,18 @@ public class AgentMover : MonoBehaviour
         agent.updateRotation = true;
         ForceIdleAnimation();
     }
+    public void HideVisual()
+    {
+        Debug.LogError("Escondo");
+        visualRoot.gameObject.SetActive(false);
+    }
 
+    public void ShowVisual()
+    {
+        Debug.LogError("Muestro");
+        visualRoot.gameObject.SetActive(true);
+    }
+    #endregion
     private void Update()
     {
         // Para cuando llueva

@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 3523919896374184313}
   - component: {fileID: 883045253767795386}
   - component: {fileID: 1874738724717799773}
-  - component: {fileID: 6377022408302039162}
   m_Layer: 0
   m_Name: Citizen
   m_TagString: Untagged
@@ -199,27 +198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e34d8b632efacc42b5193dcec81659f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &6377022408302039162
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9157238758941690386}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: de13a7420582ded45a8d7d3f96889aca, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4c7fe8e1a3919c549a79a706afefd1ce, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &6143440201980054179
 PrefabInstance:
   m_ObjectHideFlags: 0
