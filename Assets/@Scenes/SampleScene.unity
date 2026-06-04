@@ -6762,7 +6762,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 7
     m_NumAlphaKeys: 2
-  startHour: 21.8
+  startHour: 6.2
   CurrentHour: 0
 --- !u!1 &621649152
 GameObject:
@@ -10428,7 +10428,7 @@ PrefabInstance:
         type: 3}
       propertyPath: blackboard
       value: 
-      objectReference: {fileID: 30312108}
+      objectReference: {fileID: 0}
     - target: {fileID: 9100395328300049468, guid: ddea29a398028314e8ae51fbf739fdd6,
         type: 3}
       propertyPath: m_LocalPosition.x
