@@ -56,6 +56,7 @@ public class UtilityAgent : MonoBehaviour
     private void Start()
     {
         popManager = FindObjectOfType<PopulationManager>();
+        if(Blackboard == null) blackboard = FindAnyObjectByType<Blackboard>();
         if (DayNightCycle.Instance != null)
         {
             DayNightCycle.Instance.OnNightStarted += HandleNightStarted;
