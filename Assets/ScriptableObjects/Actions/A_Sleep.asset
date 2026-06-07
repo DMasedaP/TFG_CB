@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: A_Sleep
   m_EditorClassIdentifier: 
   actionName: Sleep
-  weight: 5
+  weight: 4
   considerations: []
   sleepCheckInterval: 0.2

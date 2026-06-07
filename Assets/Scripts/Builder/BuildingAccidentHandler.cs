@@ -173,7 +173,7 @@ public class BuildingAccidentHandler : MonoBehaviour
             if (agent == null)
                 continue;
 
-            agent.ForceDecision();
+            agent.InterruptAndDecide();
         }
     }
 }

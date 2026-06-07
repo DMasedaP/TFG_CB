@@ -17,7 +17,7 @@ MonoBehaviour:
   considerations: []
   interactDistance: 2
   extinguishDuration: 10
-  extinguishTickInterval: 0.5
+  extinguishTickInterval: 0.67
   deathChancePerExtinguishTick: 0.03
   repairAmountPerTick: 10
   repairTickInterval: 0.5

@@ -51,6 +51,10 @@ public class A_HandleBuildingEmergency : UtilityAction
             // 1) Apagar incendio. La muerte solo puede ocurrir aquí.
             if (building.IsOnFire)
             {
+                Debug.Log($"{agent.name} empieza a apagar el incendio en {building.name}.");
+
+                agent.mover.PlayCastingLoop();
+
                 float elapsed = 0f;
 
                 while (building != null && building.IsOnFire && elapsed < extinguishDuration)
@@ -70,18 +74,30 @@ public class A_HandleBuildingEmergency : UtilityAction
                     yield return new WaitForSeconds(extinguishTickInterval);
                 }
 
+                agent.mover.StopCastingLoop();
+
                 if (building == null)
                     yield break;
 
                 building.ExtinguishFire();
+
                 Debug.Log($"{agent.name} ha apagado el incendio en {building.name}.");
             }
 
             // 2) Reparar. Aquí NO hay probabilidad de muerte.
-            while (building != null && building.NeedsRepair)
+            if (building != null && building.NeedsRepair)
             {
-                building.Repair(repairAmountPerTick);
-                yield return new WaitForSeconds(repairTickInterval);
+                Debug.Log($"{agent.name} empieza a reparar {building.name}.");
+
+                agent.mover.PlayCastingLoop();
+
+                while (building != null && building.NeedsRepair)
+                {
+                    building.Repair(repairAmountPerTick);
+                    yield return new WaitForSeconds(repairTickInterval);
+                }
+
+                agent.mover.StopCastingLoop();
             }
 
             if (building != null)
@@ -89,6 +105,7 @@ public class A_HandleBuildingEmergency : UtilityAction
         }
         finally
         {
+            agent.mover.StopCastingLoop(); // Cortamos animacion
             if (!releasedClaim && building != null)
                 building.ReleaseEmergencyClaim(agent);
         }

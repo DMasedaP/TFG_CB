@@ -122,4 +122,21 @@ public class AgentMover : MonoBehaviour
         animator.Play("Idle", 0, 0f);
         animator.Update(0f);
     }
+
+    // Para los Incendios / Reparaciones
+    public void PlayCastingLoop()
+    {
+        Stop();
+
+        if (animator == null)
+            return;
+
+        animator.SetFloat(speedParam, 0f);
+        animator.Play("CastingLoop", 0, 0f);
+    }
+
+    public void StopCastingLoop()
+    {
+        ForceIdleAnimation();
+    }
 }
