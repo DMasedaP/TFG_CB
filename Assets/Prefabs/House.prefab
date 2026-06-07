@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7861075017483343511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1057482362661260165}
+  m_Layer: 0
+  m_Name: EmergencyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1057482362661260165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7861075017483343511}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5579066241019841002}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8874163743912336679
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,6 +161,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a5b1931e2c2529d4d84961ef488825c1,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1057482362661260165}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a5b1931e2c2529d4d84961ef488825c1,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 4403998283577537591}
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: a5b1931e2c2529d4d84961ef488825c1,
         type: 3}
@@ -226,6 +261,7 @@ MonoBehaviour:
   currentHealth: 0
   canBurn: 1
   fireVisual: {fileID: 8908627915631493377}
+  emergencyPoint: {fileID: 1057482362661260165}
 --- !u!4 &5579066241019841002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a5b1931e2c2529d4d84961ef488825c1,

@@ -44,6 +44,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072d711a39867124596f162053fada59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2158435901142199438
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1915697278181500554}
+  m_Layer: 0
+  m_Name: EmergencyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1915697278181500554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2158435901142199438}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.29, z: 4.11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 206766119100365724}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4735603301947957398
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,6 +113,7 @@ Transform:
   - {fileID: 4670513211270841780}
   - {fileID: 3604988687074636070}
   - {fileID: 4828853280452212366}
+  - {fileID: 1915697278181500554}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1790390086761234193
@@ -204,6 +236,7 @@ MonoBehaviour:
   currentHealth: 0
   canBurn: 1
   fireVisual: {fileID: 413311376377562040}
+  emergencyPoint: {fileID: 1915697278181500554}
 --- !u!1 &7118915960639999259
 GameObject:
   m_ObjectHideFlags: 0

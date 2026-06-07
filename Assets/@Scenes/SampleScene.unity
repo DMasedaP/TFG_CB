@@ -7801,7 +7801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkInterval: 60
-  accidentChancePerCheck: 0.25
+  accidentChancePerCheck: 0.3
   accidents:
   - type: 0
     enabled: 1
@@ -7810,7 +7810,7 @@ MonoBehaviour:
     maxDuration: 80
   - type: 1
     enabled: 1
-    probabilityWeight: 1
+    probabilityWeight: 2
     minDuration: 30
     maxDuration: 60
   rainVisual: {fileID: 391077532}
