@@ -67,6 +67,7 @@ public class AgentMover : MonoBehaviour
     }
     public void StandUp()
     {
+        Debug.LogError("STRANDUP");
         if (visualRoot != null)
         {
             visualRoot.localRotation = originalVisualLocalRotation;

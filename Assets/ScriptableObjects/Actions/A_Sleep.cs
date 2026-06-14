@@ -118,7 +118,7 @@ public class A_Sleep : UtilityAction
                 // Lo colocamos en el SleepPoint de la casa.
                 agent.transform.position = targetPos;
 
-                agent.mover.StandUp();
+                //agent.mover.StandUp();
 
                 agent.isSleeping = false;
             };
@@ -138,17 +138,38 @@ public class A_Sleep : UtilityAction
         }
         else
         {
-            // Si no tiene casa, duerme fuera como antes.
+            // Si no tiene casa, duerme fuera.
             agent.mover.LayDown();
             agent.isSleeping = true;
 
-            while (DayNightCycle.Instance.IsNight)
+            bool hasWokenUp = false;
+
+            Action wakeUpOutside = null;
+            wakeUpOutside = () =>
+            {
+                if (hasWokenUp)
+                    return;
+
+                hasWokenUp = true;
+
+                if (DayNightCycle.Instance != null)
+                    DayNightCycle.Instance.OnDayStarted -= wakeUpOutside;
+
+                Debug.Log("Ha amanecido. Civil que dormía fuera se levanta.");
+
+                agent.mover.StandUp();
+                agent.isSleeping = false;
+            };
+
+            DayNightCycle.Instance.OnDayStarted += wakeUpOutside;
+
+            while (DayNightCycle.Instance != null && DayNightCycle.Instance.IsNight)
             {
                 yield return new WaitForSeconds(sleepCheckInterval);
             }
 
-            agent.mover.StandUp();
-            agent.isSleeping = false;
+            // Por si la corrutina NO se ha cortado, también despertamos aquí.
+            wakeUpOutside();
         }
     }
 }
