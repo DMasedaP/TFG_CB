@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class UtilityAction : ScriptableObject
 {
+    [Header("Action UI")]
+    [SerializeField] public Sprite actionIcon;
+
     [Header("Meta")]
     public string actionName = "Unnamed";
     [Range(0f, 5f)] public float weight = 1f;

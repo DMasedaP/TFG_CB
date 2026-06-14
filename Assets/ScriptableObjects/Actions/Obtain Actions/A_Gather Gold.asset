@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe570722df9b5f4cb40e174331a4f5e, type: 3}
   m_Name: A_Gather Gold
   m_EditorClassIdentifier: 
+  actionIcon: {fileID: 21300000, guid: 93197ddf6640911429f509aa66dec44b, type: 3}
   actionName: Gather Gold
   weight: 1
   considerations:

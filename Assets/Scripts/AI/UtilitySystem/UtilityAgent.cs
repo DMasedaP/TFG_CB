@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [RequireComponent(typeof(AgentMover))]
@@ -34,6 +35,9 @@ public class UtilityAgent : MonoBehaviour
     public House assignedHouse;
     public int outdoorSleepCounter = 0;
 
+    [Header("Feedback Acciones")]
+    [SerializeField] private ActionIconDisplay actionIconDisplay;
+
     private Coroutine currentAction;
     private float nextDecisionTime;
 
@@ -51,6 +55,8 @@ public class UtilityAgent : MonoBehaviour
 
         if (eatAction == null)
             Debug.LogError("Asignar accion: A_EatFood");
+        if (actionIconDisplay == null)
+            actionIconDisplay = GetComponentInChildren<ActionIconDisplay>(true);
     }
 
     private void Start()
@@ -76,6 +82,7 @@ public class UtilityAgent : MonoBehaviour
 
         if (hunger01 >= 1f && eatAction != null && currentAction == null)
         {
+            SetCurrentActionIcon(eatAction);
             currentAction = StartCoroutine(Run(eatAction));
             hunger01 = 0f;
             return;
@@ -144,7 +151,8 @@ public class UtilityAgent : MonoBehaviour
 
         if (best != null)
         {
-            currentAction = StartCoroutine(Run(best));
+            SetCurrentActionIcon(best);
+            currentAction = StartCoroutine(Run(best));            
         }
     }
 
@@ -264,5 +272,19 @@ public class UtilityAgent : MonoBehaviour
             DayNightCycle.Instance.OnNightStarted -= HandleNightStarted;
             DayNightCycle.Instance.OnDayStarted -= HandleDayStarted;
         }
+    }
+
+    public void SetCurrentActionIcon(UtilityAction action)
+    {
+        if (actionIconDisplay == null)
+            return;
+
+        if (action == null)
+        {
+            actionIconDisplay.HideIcon();
+            return;
+        }
+
+        actionIconDisplay.SetIcon(action.actionIcon);
     }
 }

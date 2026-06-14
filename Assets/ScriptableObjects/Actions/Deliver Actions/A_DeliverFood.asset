@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84c56daed8200bf46b18826fc28a399b, type: 3}
   m_Name: A_DeliverFood
   m_EditorClassIdentifier: 
+  actionIcon: {fileID: 21300000, guid: 0dacded1ccc6d8b4589f1fe880ebb7df, type: 3}
   actionName: Deliver Food
   weight: 1.2
   considerations: []

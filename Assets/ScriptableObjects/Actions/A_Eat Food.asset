@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b9257fc664aae4bacaca83f41a151c, type: 3}
   m_Name: A_Eat Food
   m_EditorClassIdentifier: 
+  actionIcon: {fileID: 21300000, guid: 242a82891966e394789141d050a31d54, type: 3}
   actionName: Eat Food
   weight: 1
   considerations: []

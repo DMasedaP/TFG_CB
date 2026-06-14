@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 507a246baf6ca194385442cdf720d40d, type: 3}
   m_Name: A_Deliver Gold
   m_EditorClassIdentifier: 
+  actionIcon: {fileID: 21300000, guid: 2d9b716c699e9de4fa8e454236d394c7, type: 3}
   actionName: Deliver Gold
   weight: 1
   considerations: []

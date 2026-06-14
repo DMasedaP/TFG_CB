@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bab027be72f951488bcfd565225e543, type: 3}
   m_Name: A_DeliverWood
   m_EditorClassIdentifier: 
+  actionIcon: {fileID: 21300000, guid: 2314c2a61eb5a094b899f1049efe91d5, type: 3}
   actionName: Deliver Wood
   weight: 1
   considerations: []

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ecd429dcf83ba488b2f43b3cb5a14e, type: 3}
   m_Name: A_GatherWood
   m_EditorClassIdentifier: 
+  actionIcon: {fileID: 21300000, guid: b6f4b49444262f14c8708fbd9a9a07f4, type: 3}
   actionName: Gather Wood
   weight: 1
   considerations:
