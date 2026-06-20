@@ -37,7 +37,7 @@ public class A_GatherStone : UtilityAction
         mine.ReleaseSpot(agent.gameObject);
     }
 
-    private bool HasSoodStorageSpace()
+    private bool HasStoneStorageSpace()
     {
         var gm = FindAnyObjectByType<GameManager>();
         return gm.village.stoneStock < gm.village.stoneCapacity;
