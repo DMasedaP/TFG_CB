@@ -58,6 +58,7 @@ MonoBehaviour:
     m_Bits: 64
   gridSystem: {fileID: 0}
   ghostMaterial: {fileID: 2100000, guid: 316e3a7ec9b84d340aaacf57220a964f, type: 2}
+  gameManager: {fileID: 0}
 --- !u!143 &2136740672989852492
 CharacterController:
   m_ObjectHideFlags: 0
@@ -166,7 +167,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 12
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

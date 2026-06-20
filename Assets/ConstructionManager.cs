@@ -287,11 +287,13 @@ public class ConstructionManager : MonoBehaviour
         if(selectedBuilding == null) return false;
         return villageState.woodStock >= selectedBuilding.woodCost &&
             villageState.stoneStock >= selectedBuilding.stoneCost &&
-            villageState.goldStock >= selectedBuilding.goldCost;
+            villageState.goldStock >= selectedBuilding.goldCost &&
+            villageState.foodStock >= selectedBuilding.foodCost;
     }
     private void PayBuildingCost()
     {
         villageState.woodStock -= selectedBuilding.woodCost;
+        villageState.foodStock -= selectedBuilding.foodCost;
         villageState.stoneStock -= selectedBuilding.stoneCost;
         villageState.goldStock -= selectedBuilding.goldCost;
         gameManager.uiManager.UpdateResources(); // Actualizamos la UI
