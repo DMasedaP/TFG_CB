@@ -6,7 +6,7 @@ public class Tree : MonoBehaviour, IWorkplace, IResourceSource
 {
     [SerializeField] private WorkSpot[] spots;
     [SerializeField] private float workSeconds = 5;
-    [SerializeField] private int yieldPerCycle = 1; // Cantidad producida
+    [SerializeField] private int yieldPerCycle = 2; // Cantidad producida
 
     // PROPIEDADES REQUERIDAS POR INTERFACES ------------------------
     public string ResourceId => "Wood";

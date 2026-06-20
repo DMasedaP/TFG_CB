@@ -16,7 +16,7 @@ public class UtilityAgent : MonoBehaviour
     [Header("Estado del agente")]
     public float decisionInterval = 0.5f;
     public float hunger01; // 0 = lleno, 1 = hambriento
-    private const float HUNGER_FACTOR = 0.02f;
+    private const float HUNGER_FACTOR = 0.0067f;
 
     [Header("Inventario")]
     public int inventoryFood;

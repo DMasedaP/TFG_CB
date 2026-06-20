@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d84ffbc499c9c664fb203e18711289c9, type: 3}
   m_Name: VillageState
   m_EditorClassIdentifier: 
-  foodStock: 0
-  foodCapacity: 50
-  woodStock: 0
-  woodCapacity: 50
+  foodStock: 100
+  foodCapacity: 0
+  woodStock: 150
+  woodCapacity: 0
   targetWoodBuffer: 5
-  stoneStock: 0
-  stoneCapacity: 16
+  stoneStock: 50
+  stoneCapacity: 0
   targetStoneBuffer: 4
   goldStock: 0
-  goldCapacity: 100
+  goldCapacity: 0
   targetGoldBuffer: 10
   citizens: 0
+  maxCitizens: 0
   army: 0
   enemies: 0
   foodPerCitizenPerDay: 1

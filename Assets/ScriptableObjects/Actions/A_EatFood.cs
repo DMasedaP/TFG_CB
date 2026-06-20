@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "TFG/US/Action/EatFood")]
 public class A_EatFood : UtilityAction
 {
+    private const int FOOD_AMOUNT = 5;
+    private const float EAT_TIME = 6f;
     public override bool CanRun(UtilityAgent agent) => agent.inventoryFood > 0;
 
     public override IEnumerator Execute(UtilityAgent agent)
@@ -18,7 +20,7 @@ public class A_EatFood : UtilityAction
         yield return agent.mover.GoTo(target, 1.2f);
 
         // Comemos
-        agent.Blackboard.resources.TryConsumeFood(1);
-        yield return new WaitForSeconds(4);        
+        agent.Blackboard.resources.TryConsumeFood(FOOD_AMOUNT);
+        yield return new WaitForSeconds(EAT_TIME);        
     }
 }

@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 7668268793618502007}
   - component: {fileID: 4408723233272982763}
   - component: {fileID: 1272944840539482687}
+  - component: {fileID: 7112955855193084560}
   m_Layer: 0
   m_Name: SawMill
   m_TagString: Untagged
@@ -189,6 +190,23 @@ MonoBehaviour:
   canBurn: 1
   fireVisual: {fileID: 8261340726941006831}
   emergencyPoint: {fileID: 3619005193656665738}
+--- !u!114 &7112955855193084560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164787464746639423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e0ba661a7cd43f49b4016c36e823238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  villageState: {fileID: 0}
+  foodCapacityToAdd: 0
+  woodCapacityToAdd: 220
+  stoneCapacityToAdd: 0
+  goldCapacityToAdd: 0
 --- !u!1 &7627910629839952413
 GameObject:
   m_ObjectHideFlags: 0

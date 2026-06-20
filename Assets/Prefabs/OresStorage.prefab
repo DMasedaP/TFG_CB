@@ -1295,6 +1295,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6017082692145677086}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f35ced80cac87c4eb7420c3852ef0b4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4020078120194801560}
   m_SourcePrefab: {fileID: 100100000, guid: 0f35ced80cac87c4eb7420c3852ef0b4, type: 3}
 --- !u!1 &2390510415082883192 stripped
 GameObject:
@@ -1355,6 +1359,23 @@ MonoBehaviour:
   canBurn: 1
   fireVisual: {fileID: 946258160651290438}
   emergencyPoint: {fileID: 2892924245722649460}
+--- !u!114 &4020078120194801560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2390510415082883192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e0ba661a7cd43f49b4016c36e823238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  villageState: {fileID: 0}
+  foodCapacityToAdd: 0
+  woodCapacityToAdd: 0
+  stoneCapacityToAdd: 200
+  goldCapacityToAdd: 1
 --- !u!4 &3055441804554097346 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0f35ced80cac87c4eb7420c3852ef0b4,

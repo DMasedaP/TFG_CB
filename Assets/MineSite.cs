@@ -4,9 +4,9 @@ public enum MineType { Stone, Gold }
 
 public class MineSite : MonoBehaviour, IWorkplace, IResourceSource
 {
-    [SerializeField] private MineType type;
+    [SerializeField] public MineType type;
     [SerializeField] private WorkSpot[] spots;
-    [SerializeField] private float workSeconds => type == MineType.Stone ? 4 : 6; // Dependiendo si es piedra u oro, tarda mas o menos
+    [SerializeField] private float workSeconds => type == MineType.Stone ? 6 : 9; // Dependiendo si es piedra u oro, tarda mas o menos
     [SerializeField] private int yieldPerCycle = 1;
 
     [SerializeField] private GameObject mineChild; // Arrastrar

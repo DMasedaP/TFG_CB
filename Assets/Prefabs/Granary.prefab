@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4887815347068589667}
   - component: {fileID: 9085156542886086412}
   - component: {fileID: 269771230219322931}
+  - component: {fileID: 1828120309715240097}
   m_Layer: 0
   m_Name: Granary
   m_TagString: Untagged
@@ -157,6 +158,23 @@ MonoBehaviour:
   canBurn: 1
   fireVisual: {fileID: 6759058263591714744}
   emergencyPoint: {fileID: 507756996940043997}
+--- !u!114 &1828120309715240097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564109629843809938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e0ba661a7cd43f49b4016c36e823238, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  villageState: {fileID: 0}
+  foodCapacityToAdd: 300
+  woodCapacityToAdd: 0
+  stoneCapacityToAdd: 0
+  goldCapacityToAdd: 0
 --- !u!1 &1523941020611476771
 GameObject:
   m_ObjectHideFlags: 0

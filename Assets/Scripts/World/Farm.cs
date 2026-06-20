@@ -10,8 +10,8 @@ public class Farm : MonoBehaviour, IWorkplace, IResourceSource
 {
     // CONFIG GRANJA ------------------------------------------------
     [SerializeField] private WorkSpot[] spots; // Puntos de trabajo donde se colocan los aldeanos
-    [SerializeField] private float workSeconds = 3f;
-    [SerializeField] private int yieldPerCycle = 5; // Cantidad de comida producidapor ciclo de trabajo
+    [SerializeField] private float workSeconds = 4f;
+    [SerializeField] private int yieldPerCycle = 4; // Cantidad de comida producidapor ciclo de trabajo
 
     // PROPIEDADES REQUERIDAS POR INTERFACES ------------------------
     public string ResourceId => "Food";

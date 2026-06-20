@@ -119,11 +119,11 @@ public class ConstructionManager : MonoBehaviour
     {
         if (!Input.GetMouseButtonDown(0)) return;
 
-        if (!CanAffordMine())
+        /*if (!CanAffordMine())
         {
             Debug.LogError("No tienes recursos suficientes;");
             return;
-        }
+        }*/
 
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
@@ -131,10 +131,10 @@ public class ConstructionManager : MonoBehaviour
         {
             MineSite site = hit.collider.GetComponentInParent<MineSite>();
             if (site == null) Debug.LogError("Hago RayCast, pero MinSite es NULL");
-            if (site != null && site.CanConstruct())
+            if (site != null && site.CanConstruct() && CanAffordMine(site.type))
             {
                 site.Construct();
-                PayMineCost();
+                PayMineCost(site.type);
                 Debug.Log("Mina construida");
             }
         }
@@ -298,13 +298,33 @@ public class ConstructionManager : MonoBehaviour
         villageState.goldStock -= selectedBuilding.goldCost;
         gameManager.uiManager.UpdateResources(); // Actualizamos la UI
     }
-    private bool CanAffordMine()
-    {
-        return villageState.woodStock >= 10;
+    private bool CanAffordMine(MineType type)
+    {        
+        if (type == MineType.Gold)
+        {
+            return villageState.woodStock >= 100 &&
+                    villageState.foodStock >= 40 &&
+                    villageState.stoneStock >= 60;
+        }
+        else
+        {
+            return villageState.woodStock >= 80 &&
+                    villageState.foodStock >= 25;
+        }
     }
-    private void PayMineCost()
+    private void PayMineCost(MineType type)
     {
-        villageState.woodStock -= 10;
+        if(type == MineType.Gold)
+        {
+            villageState.woodStock -= 110;
+            villageState.foodStock -= 40;
+            villageState.stoneStock -= 60;
+        }
+        else
+        {
+            villageState.woodStock -= 80;
+            villageState.foodStock -= 25;
+        }
         gameManager.uiManager.UpdateResources(); // Actualizamos la UI
     }
     #endregion
