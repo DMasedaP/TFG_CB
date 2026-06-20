@@ -10,7 +10,10 @@ public class A_HarvestFarm : UtilityAction
 
     public override bool CanRun(UtilityAgent agent)
     {
-        if (agent.inventoryFood >= agent.maxFood) return false; // Inventario lleno
+        if (agent.inventoryFood >= agent.maxFood) return false; // Inventario lleno                                                                
+        // Si el almacen global de comida esta lleno, no cosechar
+        if (!HasFoodStorageSpace()) return false;
+
         return Globals.FindNearestWithFreeSpot<Farm>(agent.transform.position, searchRadius) != null;
     }
 
@@ -35,5 +38,12 @@ public class A_HarvestFarm : UtilityAction
         agent.inventoryFood += toTake;
 
         farm.ReleaseSpot(agent.gameObject);
+    }
+
+
+    private bool HasFoodStorageSpace()
+    {
+        var gm = FindAnyObjectByType<GameManager>();
+        return gm.village.foodStock < gm.village.foodCapacity;
     }
 }

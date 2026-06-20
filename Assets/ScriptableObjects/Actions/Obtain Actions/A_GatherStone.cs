@@ -11,6 +11,10 @@ public class A_GatherStone : UtilityAction
     public override bool CanRun(UtilityAgent agent)
     {
         if (agent.inventoryStone >= agent.maxStone) return false;
+
+        // Si el almacen global de comida esta lleno, no cosechar
+        if (!HasStoneStorageSpace()) return false;
+
         return Globals.FindNearestMine(agent.transform.position, searchRadius, MineType.Stone) != null;
     }
 
@@ -31,5 +35,11 @@ public class A_GatherStone : UtilityAction
         agent.inventoryStone += take;
 
         mine.ReleaseSpot(agent.gameObject);
+    }
+
+    private bool HasSoodStorageSpace()
+    {
+        var gm = FindAnyObjectByType<GameManager>();
+        return gm.village.stoneStock < gm.village.stoneCapacity;
     }
 }

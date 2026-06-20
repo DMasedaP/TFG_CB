@@ -11,6 +11,10 @@ public class A_GatherWood : UtilityAction
     public override bool CanRun(UtilityAgent agent)
     {
         if (agent.inventoryWood >= agent.maxWood) return false; // Inventario lleno
+
+        // Si el almacen global de comida esta lleno, no cosechar
+        if (!HasWoodStorageSpace()) return false;
+
         return Globals.FindNearestWithFreeSpot<Tree>(agent.transform.position, searchRadius) != null; // 60 = searchRadius
     }
     public override IEnumerator Execute(UtilityAgent agent)
@@ -32,5 +36,11 @@ public class A_GatherWood : UtilityAction
         agent.inventoryWood += toTake;
 
         tree.ReleaseSpot(agent.gameObject);
+    }
+
+    private bool HasWoodStorageSpace()
+    {
+        var gm = FindAnyObjectByType<GameManager>();
+        return gm.village.woodStock < gm.village.woodCapacity;
     }
 }

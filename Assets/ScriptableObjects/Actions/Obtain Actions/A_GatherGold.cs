@@ -10,6 +10,10 @@ public class A_GatherGold : UtilityAction
     public override bool CanRun(UtilityAgent agent)
     {
         if (agent.inventoryGold >= agent.maxGold) return false;
+
+        // Si el almacen global de comida esta lleno, no cosechar
+        if (!HasGoldStorageSpace()) return false;
+
         return Globals.FindNearestMine(agent.transform.position, searchRadius, MineType.Gold) != null;
     }
 
@@ -30,5 +34,11 @@ public class A_GatherGold : UtilityAction
         agent.inventoryGold += take;
 
         mine.ReleaseSpot(agent.gameObject);
-    }    
+    }
+
+    private bool HasGoldStorageSpace()
+    {
+        var gm = FindAnyObjectByType<GameManager>();
+        return gm.village.goldStock < gm.village.goldCapacity;
+    }
 }
