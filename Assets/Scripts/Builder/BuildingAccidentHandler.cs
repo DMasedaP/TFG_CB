@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,6 +18,9 @@ public class BuildingAccidentHandler : MonoBehaviour
     private float navMeshSampleRadius = 3f;
     private float reigniteBlockTimeAfterExtinguish = 10f;
 
+    public event Action<float> OnHealthChanged;
+    public float Health01 => maxHealth <= 0 ? 0f : (float)currentHealth / maxHealth; // La vida del [0 - 1]
+
     public bool IsOnFire { get; private set; }
     public int MaxHealth => maxHealth;
     public int CurrentHealth => currentHealth;
@@ -31,6 +35,7 @@ public class BuildingAccidentHandler : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
+        OnHealthChanged?.Invoke(Health01);
 
         if (fireVisual != null)
             fireVisual.SetActive(false);
@@ -60,7 +65,7 @@ public class BuildingAccidentHandler : MonoBehaviour
         if (Time.time < nextAllowedIgniteTime)
             return;
 
-        if (Random.value > chance)
+        if (UnityEngine.Random.value > chance)
             return;
 
         StartFire(damagePerTick, tickInterval);
@@ -140,11 +145,13 @@ public class BuildingAccidentHandler : MonoBehaviour
             return;
 
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
+        OnHealthChanged?.Invoke(Health01);
     }
 
     public void TakeDamage(int amount)
     {
-        currentHealth -= amount;
+        currentHealth = Mathf.Max(0, currentHealth - amount);
+        OnHealthChanged?.Invoke(Health01);
 
         if (currentHealth <= 0)
             DestroyBuilding();
