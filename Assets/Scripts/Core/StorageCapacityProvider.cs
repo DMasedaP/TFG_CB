@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 /*
  * Añadir en cada almacen (Granary, Sawmill y OresStorage)
@@ -13,11 +14,23 @@ public class StorageCapacityProvider : MonoBehaviour
     public int goldCapacityToAdd;
 
     private bool capacityRegistered = false;
-    void RegisterCapacity()
+    IEnumerator RegisterCapacity()
     {
-        if (capacityRegistered) return;
+        yield return new WaitForSeconds(1);
+        if (capacityRegistered) yield return null;
 
-        var villageState = FindAnyObjectByType<GameManager>().village;
+        var bb = FindAnyObjectByType<Blackboard>();
+        if (bb == null)
+        {
+            Debug.LogError("No encuentro Blackboard");
+            yield return null;
+        }
+        var villageState = bb.village;
+        if(villageState == null)
+        {
+            Debug.LogError("No encuentro VillageState");
+            yield return null;
+        }
         villageState.foodCapacity += foodCapacityToAdd;
         villageState.woodCapacity += woodCapacityToAdd;
         villageState.stoneCapacity += stoneCapacityToAdd;
@@ -54,6 +67,6 @@ public class StorageCapacityProvider : MonoBehaviour
     }
     private void Awake()
     {
-        RegisterCapacity();
+        StartCoroutine(RegisterCapacity());
     }
 }

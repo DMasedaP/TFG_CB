@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     {
         village = ScriptableObject.Instantiate(villageBase); // Copia en mem del SO base     
         uiManager = FindAnyObjectByType<UI_Manager>();
-        StartCoroutine(VillageLog());
+        //StartCoroutine(VillageLog());
     }
     #region FOOD METHODS
     public bool TryAddFood(int amount)
