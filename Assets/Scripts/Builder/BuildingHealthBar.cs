@@ -8,8 +8,23 @@ public class BuildingHealthBar : MonoBehaviour
     [SerializeField] private bool hideWhenFull = true;
     [SerializeField] private Transform cameraTransform;
 
+    // Sorting
+    private string sortingLayerName = "UI";
+    private int sortingOrder = 100;
+    private Canvas canvas;
+
     private void Start()
     {
+        // Sorting
+        canvas = GetComponent<Canvas>();
+        if (canvas == null) Debug.LogError("No he detectado HealthBarCanvas");
+        else
+        {
+            canvas.overrideSorting = true;
+            canvas.sortingLayerName = sortingLayerName;
+            canvas.sortingOrder= sortingOrder;
+        }
+
         if (cameraTransform == null && Camera.main != null)
             cameraTransform = Camera.main.transform;
 
@@ -25,12 +40,16 @@ public class BuildingHealthBar : MonoBehaviour
             building.OnHealthChanged -= UpdateBar;
     }
 
+    private void Update()
+    {
+        UpdateBar(building.Health01);
+    }
     private void LateUpdate()
     {
         if (cameraTransform == null)
             return;
 
-        transform.LookAt(transform.position + cameraTransform.forward);
+        transform.rotation = Quaternion.LookRotation(transform.position - cameraTransform.position);
     }
 
     private void UpdateBar(float health01)

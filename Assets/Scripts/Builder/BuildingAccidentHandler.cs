@@ -151,6 +151,7 @@ public class BuildingAccidentHandler : MonoBehaviour
     public void TakeDamage(int amount)
     {
         currentHealth = Mathf.Max(0, currentHealth - amount);
+        Debug.LogError($"{name} vida: {currentHealth}/{maxHealth}");
         OnHealthChanged?.Invoke(Health01);
 
         if (currentHealth <= 0)
