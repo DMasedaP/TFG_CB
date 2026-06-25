@@ -41,9 +41,10 @@ public class StorageCapacityProvider : MonoBehaviour
         Debug.Log($"{name} ha añadido capacidad al VillageState.");
     }
 
-    void UnregisterCapacity()
+    IEnumerator UnregisterCapacity()
     {
-        if (!capacityRegistered) return;
+        yield return new WaitForSeconds(1);
+        if (!capacityRegistered) yield return null;
 
         var villageState = FindAnyObjectByType<GameManager>().village;
         villageState.foodCapacity -= foodCapacityToAdd;
@@ -63,7 +64,7 @@ public class StorageCapacityProvider : MonoBehaviour
 
     private void OnDestroy()
     {
-        UnregisterCapacity();
+        StartCoroutine(UnregisterCapacity());
     }
     private void Awake()
     {
