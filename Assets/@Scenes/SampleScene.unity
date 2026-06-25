@@ -9182,6 +9182,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Farm
       objectReference: {fileID: 0}
+    - target: {fileID: 5572944867397056805, guid: 825f3330b1233b64c82178d73f3daa27,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192762413391066897, guid: 825f3330b1233b64c82178d73f3daa27,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192762413391066897, guid: 825f3330b1233b64c82178d73f3daa27,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12476,6 +12491,16 @@ PrefabInstance:
       propertyPath: building
       value: 
       objectReference: {fileID: 1107145300}
+    - target: {fileID: 5427886169246906265, guid: c8c3fabecc880b34ebd92a0f1e85efba,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5427886169246906265, guid: c8c3fabecc880b34ebd92a0f1e85efba,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5833903725331882660, guid: c8c3fabecc880b34ebd92a0f1e85efba,
         type: 3}
       propertyPath: m_LocalPosition.x
