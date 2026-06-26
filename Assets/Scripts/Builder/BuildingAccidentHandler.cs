@@ -18,13 +18,21 @@ public class BuildingAccidentHandler : MonoBehaviour
     private float navMeshSampleRadius = 3f;
     private float reigniteBlockTimeAfterExtinguish = 10f;
 
+    [Header("Decay")]
+    private float decayTickInterval = 10f;
+    private int decayDamagePerTick = 1;
+    private float repairThreshold01 = 0.5f;
+
+    //public bool NeedsRepair => Health01 <= repairThreshold01;
+    private Coroutine decayRoutine;
+
     public event Action<float> OnHealthChanged;
     public float Health01 => maxHealth <= 0 ? 0f : (float)currentHealth / maxHealth; // La vida del [0 - 1]
 
     public bool IsOnFire { get; private set; }
     public int MaxHealth => maxHealth;
     public int CurrentHealth => currentHealth;
-    public bool NeedsRepair => currentHealth < maxHealth;
+    public bool NeedsRepair => currentHealth < maxHealth || Health01 <= repairThreshold01;
     public bool HasEmergencyClaim => emergencyAgent != null;
 
     private Coroutine fireRoutine;
@@ -40,6 +48,10 @@ public class BuildingAccidentHandler : MonoBehaviour
         if (fireVisual != null)
             fireVisual.SetActive(false);
         if (emergencyPoint == null) Debug.LogError("¡Asigna Emergency Point!");
+    }
+    private void Start()
+    {
+        decayRoutine = StartCoroutine(BuildingDecay());
     }
 
     public Vector3 GetEmergencyPosition()
@@ -183,5 +195,21 @@ public class BuildingAccidentHandler : MonoBehaviour
 
             agent.InterruptAndDecide();
         }
+    }
+
+    // - - - D E C A Y - - - - - - - - - - -
+    private IEnumerator BuildingDecay()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(decayTickInterval);
+            if (!IsOnFire)
+                TakeDamage(decayDamagePerTick);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }
