@@ -7713,7 +7713,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 7
     m_NumAlphaKeys: 2
-  startHour: 8
+  startHour: 21.5
   CurrentHour: 0
 --- !u!1 &621649152
 GameObject:
@@ -8142,6 +8142,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5619520549494193872, guid: ddea29a398028314e8ae51fbf739fdd6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9100395328300049468, guid: ddea29a398028314e8ae51fbf739fdd6,
         type: 3}
@@ -12574,6 +12579,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House
+      objectReference: {fileID: 0}
+    - target: {fileID: 5055012969951056720, guid: 8c58e727fb205cf4a9ba5edd9dba62aa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5579066241019841002, guid: 8c58e727fb205cf4a9ba5edd9dba62aa,
         type: 3}
