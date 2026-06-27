@@ -21,8 +21,16 @@ public class AgentMover : MonoBehaviour
     [Header("Sleep Visuals")]
     [SerializeField] private Transform visualRoot;
 
+    [Header("Sleep Danger Feedback")]
+    [SerializeField] private Renderer[] sleepDangerRenderers;
+    [SerializeField] private Material originalSleepMaterial;
+    [SerializeField] private Material sleepDangerMaterial;
+    [SerializeField] private float sleepDangerBlinkInterval = 0.5f;
+
     private Quaternion originalVisualLocalRotation;
     private Vector3 originalVisualLocalPosition;
+
+    private Coroutine sleepDangerCoroutine;
 
     void Awake()
     {
@@ -68,6 +76,7 @@ public class AgentMover : MonoBehaviour
     public void StandUp()
     {
         Debug.LogError("STRANDUP");
+        StopSleepDangerFeedback();
         if (visualRoot != null)
         {
             visualRoot.localRotation = originalVisualLocalRotation;
@@ -80,6 +89,7 @@ public class AgentMover : MonoBehaviour
     public void HideVisual()
     {
         Debug.LogError("Escondo");
+        StopSleepDangerFeedback();
         visualRoot.gameObject.SetActive(false);
     }
 
@@ -139,5 +149,89 @@ public class AgentMover : MonoBehaviour
     public void StopCastingLoop()
     {
         ForceIdleAnimation();
+    }
+
+    #region Sleep Danger Feedback
+    public void StartSleepDangerFeedback()
+    {
+        StopSleepDangerFeedback();
+
+        if (originalSleepMaterial == null)
+        {
+            Debug.LogWarning($"{name}: Falta asignar originalSleepMaterial.");
+            return;
+        }
+
+        if (sleepDangerMaterial == null)
+        {
+            Debug.LogWarning($"{name}: Falta asignar sleepDangerMaterial.");
+            return;
+        }
+
+        EnsureSleepDangerRenderers();
+
+        if (sleepDangerRenderers == null || sleepDangerRenderers.Length == 0)
+        {
+            Debug.LogWarning($"{name}: No se han encontrado renderers para el feedback de dormir fuera.");
+            return;
+        }
+
+        sleepDangerCoroutine = StartCoroutine(SleepDangerFeedbackCoroutine());
+    }
+
+    public void StopSleepDangerFeedback()
+    {
+        if (sleepDangerCoroutine != null)
+        {
+            StopCoroutine(sleepDangerCoroutine);
+            sleepDangerCoroutine = null;
+        }
+
+        SetMaterialToAllSleepRenderers(originalSleepMaterial);
+    }
+
+    private IEnumerator SleepDangerFeedbackCoroutine()
+    {
+        WaitForSeconds wait = new WaitForSeconds(Mathf.Max(0.05f, sleepDangerBlinkInterval));
+
+        while (true)
+        {
+            SetMaterialToAllSleepRenderers(sleepDangerMaterial);
+            yield return wait;
+
+            SetMaterialToAllSleepRenderers(originalSleepMaterial);
+            yield return wait;
+        }
+    }
+
+    private void EnsureSleepDangerRenderers()
+    {
+        if (sleepDangerRenderers != null && sleepDangerRenderers.Length > 0)
+            return;
+
+        if (visualRoot != null)
+            sleepDangerRenderers = visualRoot.GetComponentsInChildren<Renderer>(true);
+        else
+            sleepDangerRenderers = GetComponentsInChildren<Renderer>(true);
+    }
+
+    private void SetMaterialToAllSleepRenderers(Material materialToApply)
+    {
+        if (sleepDangerRenderers == null)
+            return;
+
+        for (int i = 0; i < sleepDangerRenderers.Length; i++)
+        {
+            if (sleepDangerRenderers[i] == null)
+                continue;
+
+            sleepDangerRenderers[i].material = materialToApply;
+        }
+    }
+    #endregion
+
+    private void OnDisable()
+    {
+        StopSleepDangerFeedback();
     }
 }

@@ -140,6 +140,7 @@ public class A_Sleep : UtilityAction
         {
             // Si no tiene casa, duerme fuera.
             agent.mover.LayDown();
+            agent.mover.StartSleepDangerFeedback();
             agent.isSleeping = true;
 
             bool hasWokenUp = false;
@@ -156,7 +157,7 @@ public class A_Sleep : UtilityAction
                     DayNightCycle.Instance.OnDayStarted -= wakeUpOutside;
 
                 Debug.Log("Ha amanecido. Civil que dormía fuera se levanta.");
-
+                agent.mover.StopSleepDangerFeedback();
                 agent.mover.StandUp();
                 agent.isSleeping = false;
             };
