@@ -19,9 +19,9 @@ public class BuildingAccidentHandler : MonoBehaviour
     private float reigniteBlockTimeAfterExtinguish = 10f;
 
     [Header("Decay")]
-    private float decayTickInterval = 10f;
-    private int decayDamagePerTick = 1;
-    private float repairThreshold01 = 0.5f;
+    [SerializeField] private float decayTickInterval = 10f;
+    [SerializeField] private int decayDamagePerTick = 1;
+    [SerializeField] private float repairThreshold01 = 0.5f;
 
     //public bool NeedsRepair => Health01 <= repairThreshold01;
     private Coroutine decayRoutine;

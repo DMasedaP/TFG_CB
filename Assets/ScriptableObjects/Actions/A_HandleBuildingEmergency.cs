@@ -83,23 +83,7 @@ public class A_HandleBuildingEmergency : UtilityAction
 
                 Debug.Log($"{agent.name} ha apagado el incendio en {building.name}.");
             }
-
-            // 2) Reparar. Aquí NO hay probabilidad de muerte.
-            if (building != null && building.NeedsRepair)
-            {
-                Debug.Log($"{agent.name} empieza a reparar {building.name}.");
-
-                agent.mover.PlayCastingLoop();
-
-                while (building != null && building.NeedsRepair)
-                {
-                    building.Repair(repairAmountPerTick);
-                    yield return new WaitForSeconds(repairTickInterval);
-                }
-
-                agent.mover.StopCastingLoop();
-            }
-
+            
             if (building != null)
                 Debug.Log($"{agent.name} ha reparado {building.name} al 100%.");
         }
@@ -113,10 +97,10 @@ public class A_HandleBuildingEmergency : UtilityAction
 
     private BuildingAccidentHandler FindBestTarget(UtilityAgent agent)
     {
-        BuildingAccidentHandler[] buildings = FindObjectsByType<BuildingAccidentHandler>(FindObjectsSortMode.None);
+        BuildingAccidentHandler[] buildings =
+            FindObjectsByType<BuildingAccidentHandler>(FindObjectsSortMode.None);
 
         BuildingAccidentHandler best = null;
-        float bestPriority = float.MinValue;
         float bestDistance = float.MaxValue;
 
         foreach (BuildingAccidentHandler building in buildings)
@@ -127,19 +111,14 @@ public class A_HandleBuildingEmergency : UtilityAction
             if (building.HasEmergencyClaim)
                 continue;
 
-            bool isValidEmergency = building.IsOnFire || building.NeedsRepair;
-
-            if (!isValidEmergency)
+            if (!building.IsOnFire)
                 continue;
 
-            float priority = building.IsOnFire ? 2f : 1f;
             float distance = Vector3.Distance(agent.transform.position, building.transform.position);
 
-            if (priority > bestPriority ||
-                (Mathf.Approximately(priority, bestPriority) && distance < bestDistance))
+            if (distance < bestDistance)
             {
                 best = building;
-                bestPriority = priority;
                 bestDistance = distance;
             }
         }
