@@ -133,11 +133,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 9.113001, y: 5.0410004, z: 4.7120004}
+  m_Extents: {x: 4.589952, y: 5.0410004, z: 4.711963}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0.97900003, y: 5.0140004, z: 0}
+  m_Center: {x: -0.02375921, y: 5.0140004, z: 0}
   m_TimeToStationary: 0.5
 --- !u!114 &7668268793618502007
 MonoBehaviour:
@@ -172,8 +172,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 18.226393, y: 10.082533, z: 9.423924}
-  m_Center: {x: 0.9794626, y: 5.0135317, z: 0}
+  m_Size: {x: 9.179904, y: 10.082, z: 9.423926}
+  m_Center: {x: -0.023759207, y: 5.0135317, z: 0}
 --- !u!114 &1272944840539482687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +191,9 @@ MonoBehaviour:
   canBurn: 1
   fireVisual: {fileID: 8261340726941006831}
   emergencyPoint: {fileID: 3619005193656665738}
+  decayTickInterval: 10
+  decayDamagePerTick: 1
+  repairThreshold01: 0.5
 --- !u!114 &7112955855193084560
 MonoBehaviour:
   m_ObjectHideFlags: 0
