@@ -52,6 +52,7 @@ public class DayNightCycle : MonoBehaviour
     }
     private void Start()
     {
+        UpdateSun();
         // Suscribimos funciones
         OnDayStarted += ChangeDayIcon;
         OnNightStarted += ChangeNightIcon;                

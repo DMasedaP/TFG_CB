@@ -7713,7 +7713,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 7
     m_NumAlphaKeys: 2
-  startHour: 21.5
+  startHour: 10
   CurrentHour: 0
 --- !u!1 &621649152
 GameObject:
