@@ -7177,7 +7177,7 @@ MonoBehaviour:
   mapCenter: {x: 0, y: 0, z: 0}
   fixedY: 0.5
   borderMargin: 3
-  totalInstances: 1000
+  totalInstances: 3000
   useRandomSeed: 0
   seed: 12345
   scaleRange: {x: 0.8, y: 1.3}
