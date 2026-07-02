@@ -196,7 +196,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 2.966, y: 2.45, z: 4.4290004}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 2.424, z: 0.027}
   m_TimeToStationary: 0.5
@@ -238,6 +238,9 @@ MonoBehaviour:
   canBurn: 1
   fireVisual: {fileID: 413311376377562040}
   emergencyPoint: {fileID: 1915697278181500554}
+  decayTickInterval: 10
+  decayDamagePerTick: 1
+  repairThreshold01: 0.5
 --- !u!1 &7118915960639999259
 GameObject:
   m_ObjectHideFlags: 0

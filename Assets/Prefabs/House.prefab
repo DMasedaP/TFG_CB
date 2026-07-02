@@ -231,7 +231,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 1.8420001, y: 1.4900001, z: 2.9}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0.039, y: 1.3260001, z: 0.037}
   m_TimeToStationary: 0.5
@@ -266,6 +266,9 @@ MonoBehaviour:
   canBurn: 1
   fireVisual: {fileID: 8908627915631493377}
   emergencyPoint: {fileID: 1057482362661260165}
+  decayTickInterval: 10
+  decayDamagePerTick: 1
+  repairThreshold01: 0.5
 --- !u!4 &5579066241019841002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a5b1931e2c2529d4d84961ef488825c1,
