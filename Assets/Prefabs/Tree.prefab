@@ -124,7 +124,8 @@ MonoBehaviour:
   - {fileID: 7174807056333983597}
   - {fileID: 2923518676053578869}
   workSeconds: 5
-  yieldPerCycle: 1
+  yieldPerCycle: 4
+  maxHarvestCycles: 5
 --- !u!1 &4273821491512815600
 GameObject:
   m_ObjectHideFlags: 0

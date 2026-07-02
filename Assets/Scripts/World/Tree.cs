@@ -7,7 +7,7 @@ public class Tree : MonoBehaviour, IWorkplace, IResourceSource
     [Header("Work")]
     [SerializeField] private WorkSpot[] spots;
     [SerializeField] private float workSeconds = 5;
-    [SerializeField] private int yieldPerCycle = 2; // Cantidad producida
+    [SerializeField] private int yieldPerCycle = 4; // Cantidad producida
 
     [Header("Health")]
     [SerializeField] private int maxHarvestCycles = 5;

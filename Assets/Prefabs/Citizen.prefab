@@ -385,9 +385,9 @@ MonoBehaviour:
   inventoryStone: 0
   inventoryGold: 0
   maxFood: 10
-  maxWood: 1
-  maxStone: 1
-  maxGold: 2
+  maxWood: 4
+  maxStone: 9
+  maxGold: 6
   isSleeping: 0
   sleptOutsideLastNight: 0
   assignedHouse: {fileID: 0}
