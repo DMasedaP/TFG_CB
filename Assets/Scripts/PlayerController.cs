@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    float speed = 20f;
+    [SerializeField] private float speed;
     private CharacterController controller;
     public Transform cameraTrf; // Asignar en editor
 
