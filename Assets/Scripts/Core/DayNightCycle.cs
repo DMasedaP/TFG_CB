@@ -27,7 +27,7 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] private Gradient colorGradient;
     public float WeatherLightMultiplier { get; set; } = 1f; // Para cuando llueva
 
-    private const float fullDayDurationSecs = 120; // VELOCIDAD DE SIMUALCION DEL CICLO
+    private const float fullDayDurationSecs = 240; // VELOCIDAD DE SIMUALCION DEL CICLO
     [SerializeField] private float startHour = 12;
     private float nightStartsAt = 22f;
     private float dayStartsAt = 6f;
