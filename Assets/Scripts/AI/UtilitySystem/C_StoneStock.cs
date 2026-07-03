@@ -7,12 +7,26 @@ using UnityEngine;
 
 public class C_StoneStock : UtilityConsideration
 {
-    // Sube la utilidad de minar Oro cuando el stock está por debajo del objetivo
+    [Header("Urgency")]
+    [SerializeField] private float criticalRatio = 0.20f;
+    [SerializeField] private float safeRatio = 0.75f;
+
     protected override float Query(UtilityAgent agent)
     {
         var v = agent.Blackboard.village;
-        if (v.targetStoneBuffer <= 0) return 0f;
+
+        if (v.targetStoneBuffer <= 0)
+            return 0f;
+
         float ratio = Mathf.Clamp01((float)v.stoneStock / v.targetStoneBuffer);
-        return 1f - ratio;
+
+        if (ratio <= criticalRatio)
+            return 1f;
+
+        if (ratio >= safeRatio)
+            return 0f;
+
+        float t = Mathf.InverseLerp(safeRatio, criticalRatio, ratio);
+        return Mathf.Clamp01(t);
     }
 }

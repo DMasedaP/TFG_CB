@@ -16,13 +16,13 @@ MonoBehaviour:
   foodCapacity: 0
   woodStock: 220
   woodCapacity: 0
-  targetWoodBuffer: 100
+  targetWoodBuffer: 120
   stoneStock: 80
   stoneCapacity: 0
-  targetStoneBuffer: 80
+  targetStoneBuffer: 70
   goldStock: 0
   goldCapacity: 0
-  targetGoldBuffer: 50
+  targetGoldBuffer: 40
   citizens: 0
   maxCitizens: 0
   army: 0

@@ -7,13 +7,26 @@ using UnityEngine.VFX;
 [CreateAssetMenu(menuName = "TFG/US/Consideration/WoodStockLow")]
 public class C_WoodStock : UtilityConsideration
 {
-    // Sube la utilidad de recolectar madera cuando el stock está por debajo del objetivo
+    [Header("Urgency")]
+    [SerializeField] private float criticalRatio = 0.25f;
+    [SerializeField] private float safeRatio = 0.85f;
 
     protected override float Query(UtilityAgent agent)
     {
-        var v = agent.blackboard.village;
-        if(v.targetWoodBuffer <= 0) return 0f; // Sin objetivo, no hay urgencia
+        var v = agent.Blackboard.village;
+
+        if (v.targetWoodBuffer <= 0)
+            return 0f;
+
         float ratio = Mathf.Clamp01((float)v.woodStock / v.targetWoodBuffer);
-        return 1f - ratio; // 1 = mucha necesidad, 0 = cubierto
+
+        if (ratio <= criticalRatio)
+            return 1f;
+
+        if (ratio >= safeRatio)
+            return 0f;
+
+        float t = Mathf.InverseLerp(safeRatio, criticalRatio, ratio);
+        return Mathf.Clamp01(t);
     }
 }
