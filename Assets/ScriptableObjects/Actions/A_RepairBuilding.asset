@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionIcon: {fileID: 21300000, guid: aaa3b6ff996d98c4b9f8ceee25f14b09, type: 3}
   actionName: Repair Building
-  weight: 1
+  weight: 2.4
   considerations:
   - {fileID: 11400000, guid: 4e526c311a847ff4f9e7fb9cc20fb892, type: 2}
   interactDistance: 1.5

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionIcon: {fileID: 21300000, guid: 8a878dded7a44e04f9c85c8ee0feedaf, type: 3}
   actionName: Gather Stone
-  weight: 1
+  weight: 2.8
   considerations:
   - {fileID: 11400000, guid: 91119dd05a363b840bc5159bb9c6b9ef, type: 2}
   searchRadius: 80

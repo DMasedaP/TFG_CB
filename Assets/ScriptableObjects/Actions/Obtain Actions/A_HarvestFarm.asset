@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionIcon: {fileID: 21300000, guid: 3e1721226fe4ddd408fa26ee23676754, type: 3}
   actionName: Harvest Farm
-  weight: 1
+  weight: 3.5
   considerations:
   - {fileID: 11400000, guid: e048c1221c00eca47a3657cfb753c0c0, type: 2}
   searchRadius: 60

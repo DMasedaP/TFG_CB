@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionIcon: {fileID: 21300000, guid: 2314c2a61eb5a094b899f1049efe91d5, type: 3}
   actionName: Deliver Wood
-  weight: 1
+  weight: 3.5
   considerations: []

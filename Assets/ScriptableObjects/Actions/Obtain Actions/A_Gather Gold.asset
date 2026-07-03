@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionIcon: {fileID: 21300000, guid: 93197ddf6640911429f509aa66dec44b, type: 3}
   actionName: Gather Gold
-  weight: 1
+  weight: 2.3
   considerations:
   - {fileID: 11400000, guid: 460fd3cf960c75b4ea24d91cb2dee561, type: 2}
   searchRadius: 80

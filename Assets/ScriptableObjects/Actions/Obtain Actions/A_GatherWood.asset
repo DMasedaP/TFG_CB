@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionIcon: {fileID: 21300000, guid: b6f4b49444262f14c8708fbd9a9a07f4, type: 3}
   actionName: Gather Wood
-  weight: 1
+  weight: 3.2
   considerations:
   - {fileID: 11400000, guid: 2240eed39accf7040ae8acb3b82d3612, type: 2}
   searchRadius: 60

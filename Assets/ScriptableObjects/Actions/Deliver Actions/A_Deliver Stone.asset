@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionIcon: {fileID: 21300000, guid: 71b82b96944989f4488146a67483ebe9, type: 3}
   actionName: Deliver Stone
-  weight: 1
+  weight: 3
   considerations: []
