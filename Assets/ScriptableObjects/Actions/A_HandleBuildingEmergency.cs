@@ -18,9 +18,9 @@ public class A_HandleBuildingEmergency : UtilityAction
     public int repairAmountPerTick = 10;
     public float repairTickInterval = 0.5f;
 
-    [Header("Utility")]
-    public float fireScore = 1000f;
-    public float repairScore = 700f;
+    //[Header("Utility")]
+    //public float fireScore = 1000f;
+    //public float repairScore = 700f;
 
     public override bool CanRun(UtilityAgent agent)
     {

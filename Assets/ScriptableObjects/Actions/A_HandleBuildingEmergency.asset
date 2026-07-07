@@ -22,5 +22,3 @@ MonoBehaviour:
   deathChancePerExtinguishTick: 0.03
   repairAmountPerTick: 10
   repairTickInterval: 0.5
-  fireScore: 1000
-  repairScore: 700
